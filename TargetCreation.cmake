@@ -42,9 +42,8 @@ if(NOT NM_TARGETCREATION_CMAKE_INCLUDED)
     set_property(TARGET "${NAME}" PROPERTY FOLDER "Libraries/${FOLDER_NAME}")
     set_property(TARGET "${NAME}" PROPERTY PROJECT_LABEL "Library")
 
-    target_link_libraries(${NAME} PUBLIC ${NM_THIRDPARTY_LIBS})
+    target_link_libraries(${NAME} ${NM_THIRDPARTY_LIBS})
     target_compile_options(${NAME} PUBLIC ${NM_LIB_COMPILER_FLAGS})
-
     target_include_directories(${NAME} PUBLIC ${PROJECT_SOURCE_DIR}/include)
   endfunction()
 
@@ -62,9 +61,8 @@ if(NOT NM_TARGETCREATION_CMAKE_INCLUDED)
     set_property(TARGET "${NAME}" PROPERTY FOLDER "Tools/${FOLDER_NAME}")
     set_property(TARGET "${NAME}" PROPERTY PROJECT_LABEL "Tool")
 
-    target_link_libraries(${NAME} PUBLIC ${NM_THIRDPARTY_LIBS})
+    target_link_libraries(${NAME} ${NM_THIRDPARTY_LIBS})
     target_compile_options(${NAME} PUBLIC ${NM_TOOL_COMPILER_FLAGS})
-
     target_include_directories(${NAME} PUBLIC ${PROJECT_SOURCE_DIR}/include)
     target_include_directories(${NAME} PUBLIC ${nm_target_include_dir})
   endfunction()

@@ -31,6 +31,7 @@ if(NOT NM_NICEMAKE_CMAKE_INCLUDED)
   include(${CMAKE_CURRENT_LIST_DIR}/Sanitizers.cmake)
   include(${CMAKE_CURRENT_LIST_DIR}/Options.cmake)
   include(${CMAKE_CURRENT_LIST_DIR}/TargetCreation.cmake)
+  include(${CMAKE_CURRENT_LIST_DIR}/ThirdPartyLibs.cmake)
 
 
   set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)

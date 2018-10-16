@@ -26,22 +26,36 @@
 # other dealings in this Software without prior written authorization.
 
 if(NOT NM_THIRDPARTYLIBS_CMAKE_INCLUDED)
-
   set(NM_THIRDPARTY_LIBS)
 
-  macro(nm_add_thirdparty_lib NAME)
-    set(nm_libs "TODO")
-    set(nm_include_dirs "TODO")
-    set(nm_public_compile_opts "TODO")
+  macro(nm_add_thirdparty_libs)
+    cmake_parse_arguments(
+      P_ARGS
+      ""
+      "NAME"
+      "LIBS;INCLUDE_DIRS;COMPILE_OPTIONS"
+      ${ARGN}
+    )
 
+    if(NOT P_ARGS_LIBS)
+      message(FATAL "nm_add_thirdparty_lib: LIBS must be specified")
+    endif()
 
-    set(nm_dummy_target_name nm_${NAME})
+    if(P_ARGS_NAME)
+      set(nm_dummy_target_name ${P_ARGS_NAME})
+      nm_add_dummy_library(${nm_dummy_target_name})
+      target_link_libraries(${nm_dummy_target_name} PUBLIC ${P_ARGS_LIBS})
+      target_include_directories(${nm_dummy_target_name} PUBLIC ${P_ARGS_INCLUDE_DIRS})
+      target_compile_options(${nm_dummy_target_name} PUBLIC ${P_ARGS_COMPILE_OPTIONS})
 
-    add_library(${nm_dummy_target_name} STATIC ${CMAKE_CURRENT_LIST_DIR}/empty.cpp)
-    target_link_libraries(${nm_dummy_target_name} PUBLIC ${nm_libs})
-    target_include_directories(${nm_dummy_target_name} PUBLIC ${nm_include_dirs})
-    target_compile_options(${nm_dummy_target_name} PUBLIC ${nm_public_compile_opts})
-    list(APPEND NM_THIRDPARTY_LIBS ${nm_dummy_target_name})
+      list(APPEND NM_THIRDPARTY_LIBS ${nm_dummy_target_name})
+    else()
+      if(P_ARGS_INCLUDE_DIRS OR P_ARGS_COMPILE_OPTIONS)
+        message(FATAL "nm_add_thirdparty_lib: INCLUDE_DIRS and COMPILE_OPTIONS can only be specified in conjunction with NAME")
+      endif()
+
+      list(APPEND NM_THIRDPARTY_LIBS ${P_ARGS_LIBS})
+    endif()
   endmacro()
 
   set(NM_THIRDPARTYLIBS_CMAKE_INCLUDED TRUE)
