@@ -32,24 +32,33 @@ if(NOT NM_SANITIZERS_CMAKE_INCLUDED)
 
 
   if(NM_COMPILING_WITH_GNULIKE)
-    if(ENABLE_ASAN)
-      nm_add_compiler_flags(-fsanitize=address)
+    set(sanitizer_flags)
+
+    if(${NM_OPT_PREFIX}_ENABLE_ASAN)
+      list(APPEND sanitizer_flags -fsanitize=address)
     endif()
 
-    if(ENABLE_MSAN)
-      nm_add_compiler_flags(-fsanitize=memory)
+    if(${NM_OPT_PREFIX}_ENABLE_MSAN)
+      list(APPEND sanitizer_flags -fsanitize=memory)
     endif()
 
-    if(ENABLE_TSAN)
-      nm_add_compiler_flags(-fsanitize=thread)
+    if(${NM_OPT_PREFIX}_ENABLE_TSAN)
+      list(APPEND sanitizer_flags -fsanitize=thread)
     endif()
 
-    if(ENABLE_UBSAN)
-      nm_add_compiler_flags(-fsanitize=undefined)
+    if(${NM_OPT_PREFIX}_ENABLE_UBSAN)
+      list(APPEND sanitizer_flags -fsanitize=undefined)
     endif()
 
+    if(sanitizer_flags)
+      list(APPEND sanitizer_flags "-fno-omit-frame-pointer")
+      nm_add_compiler_flags(${sanitizer_flags})
+
+      string(REPLACE ";" " " SANITIZER_LINKER_FLAGS "${sanitizer_flags}")
+      set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${SANITIZER_LINKER_FLAGS}")
+    endif()
   else()
-    message(WARNING "NiceMake: no sanitizer support for MSVC")
+    message(WARNING "NiceMake: no sanitizer support for MSVC. Sanitizer settings ignored.")
   endif()
 
   set(NM_SANITIZERS_CMAKE_INCLUDED TRUE)
