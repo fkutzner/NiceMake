@@ -32,13 +32,13 @@ if(NOT NM_TARGETCREATION_CMAKE_INCLUDED)
   include(${CMAKE_CURRENT_LIST_DIR}/CompilerFlags.cmake)
   set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
-  function(nm_add_library NAME)
+  function(nm_add_library NAME KIND)
     string(REPLACE "." "/" FOLDER_NAME ${NAME})
 
     set(nm_target_include_dir "${PROJECT_SOURCE_DIR}/include/${FOLDER_NAME}")
     file(GLOB LIBRARY_HEADERS "${nm_target_include_dir}/*.h")
 
-    add_library(${NAME} STATIC ${LIBRARY_HEADERS} ${ARGN})
+    add_library(${NAME} ${KIND} ${LIBRARY_HEADERS} ${ARGN})
     set_property(TARGET "${NAME}" PROPERTY FOLDER "Libraries/${FOLDER_NAME}")
     set_property(TARGET "${NAME}" PROPERTY PROJECT_LABEL "Library")
 
@@ -48,7 +48,7 @@ if(NOT NM_TARGETCREATION_CMAKE_INCLUDED)
   endfunction()
 
   function(nm_add_dummy_library NAME)
-    nm_add_library(${NAME} ${NM_EMPTY_CPP_FILE})
+    nm_add_library(${NAME} STATIC ${NM_EMPTY_CPP_FILE})
   endfunction()
 
   function(nm_add_tool NAME)
