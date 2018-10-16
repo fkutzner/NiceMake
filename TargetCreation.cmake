@@ -27,6 +27,8 @@
 
 if(NOT NM_TARGETCREATION_CMAKE_INCLUDED)
 
+  set(NM_EMPTY_CPP_FILE ${CMAKE_CURRENT_LIST_DIR}/empty.cpp)
+
   include(${CMAKE_CURRENT_LIST_DIR}/CompilerFlags.cmake)
   set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
@@ -44,6 +46,10 @@ if(NOT NM_TARGETCREATION_CMAKE_INCLUDED)
     target_compile_options(${NAME} PUBLIC ${NM_LIB_COMPILER_FLAGS})
 
     target_include_directories(${NAME} PUBLIC ${PROJECT_SOURCE_DIR}/include)
+  endfunction()
+
+  function(nm_add_dummy_library NAME)
+    nm_add_library(${NAME} ${NM_EMPTY_CPP_FILE})
   endfunction()
 
   function(nm_add_tool NAME)
