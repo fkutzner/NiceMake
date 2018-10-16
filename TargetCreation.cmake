@@ -42,7 +42,10 @@ if(NOT NM_TARGETCREATION_CMAKE_INCLUDED)
     set_property(TARGET "${NAME}" PROPERTY FOLDER "Libraries/${FOLDER_NAME}")
     set_property(TARGET "${NAME}" PROPERTY PROJECT_LABEL "Library")
 
-    target_link_libraries(${NAME} ${NM_THIRDPARTY_LIBS})
+    if(NOT ${KIND} STREQUAL "OBJECT")
+      target_link_libraries(${NAME} ${NM_THIRDPARTY_LIBS})
+    endif()
+
     target_compile_options(${NAME} PUBLIC ${NM_LIB_COMPILER_FLAGS})
     target_include_directories(${NAME} PUBLIC ${PROJECT_SOURCE_DIR}/include)
   endfunction()
