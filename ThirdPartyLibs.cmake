@@ -33,7 +33,7 @@ if(NOT NM_THIRDPARTYLIBS_CMAKE_INCLUDED)
       P_ARGS
       ""
       "NAME"
-      "LIBS;INCLUDE_DIRS;COMPILE_OPTIONS"
+      "LIBS;INTERFACE_INCLUDE_DIRS;INTERFACE_COMPILE_OPTIONS"
       ${ARGN}
     )
 
@@ -43,15 +43,15 @@ if(NOT NM_THIRDPARTYLIBS_CMAKE_INCLUDED)
 
     if(P_ARGS_NAME)
       set(nm_dummy_target_name ${P_ARGS_NAME})
-      nm_add_dummy_library(${nm_dummy_target_name})
-      target_link_libraries(${nm_dummy_target_name} PUBLIC ${P_ARGS_LIBS})
-      target_include_directories(${nm_dummy_target_name} PUBLIC ${P_ARGS_INCLUDE_DIRS})
-      target_compile_options(${nm_dummy_target_name} PUBLIC ${P_ARGS_COMPILE_OPTIONS})
+      add_library(${nm_dummy_target_name} INTERFACE)
+      target_link_libraries(${nm_dummy_target_name} INTERFACE ${P_ARGS_LIBS})
+      target_include_directories(${nm_dummy_target_name} INTERFACE ${P_ARGS_INTERFACE_INCLUDE_DIRS})
+      target_compile_options(${nm_dummy_target_name} INTERFACE ${P_ARGS_INTERFACE_COMPILE_OPTIONS})
 
       list(APPEND NM_THIRDPARTY_LIBS ${nm_dummy_target_name})
     else()
-      if(P_ARGS_INCLUDE_DIRS OR P_ARGS_COMPILE_OPTIONS)
-        message(FATAL "nm_add_thirdparty_lib: INCLUDE_DIRS and COMPILE_OPTIONS can only be specified in conjunction with NAME")
+      if(P_ARGS_INTERFACE_INCLUDE_DIRS OR P_ARGS_INTERFACE_COMPILE_OPTIONS)
+        message(FATAL "nm_add_thirdparty_lib: INTERFACE_INCLUDE_DIRS and INTERFACE_COMPILE_OPTIONS can only be specified in conjunction with NAME")
       endif()
 
       list(APPEND NM_THIRDPARTY_LIBS ${P_ARGS_LIBS})
