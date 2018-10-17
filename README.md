@@ -17,6 +17,9 @@ layout conventions close to those used by the [LLVM
 project](https://github.com/llvm-mirror/llvm). See the
 [examples](doc/Examples.md) or the [manual](doc/Manual.md) for further details.
 
+NiceMake is free software distributed under the
+[MIT license (X11 variant)](doc/License.md).
+
 ## Scope
 
 NiceMake aims to provide the functionality useful for most CMake-based C and
@@ -37,11 +40,12 @@ NiceMake 0.0.1 requires CMake version 3.10.
 
 ## Getting started
 
-1. Copy NiceMake somewhere in your project, e.g. to the directory
+1. Copy NiceMake somewhere into your project, e.g. to the directory
    `cmake/nicemake` (such that `cmake/nicemake/NiceMake.cmake` exists). If you
    use git, you could simply dd the NiceMake repository as a submodule.
 2. In your toplevel `CMakeLists.txt`, include NiceMake by inserting the line
    `include(cmake/nicemake/NiceMake.cmake)`
+3. See the [examples](doc/Examples.md) or the [manual](doc/Manual.md).
 
 
 ## Versions
