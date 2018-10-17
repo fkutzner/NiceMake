@@ -30,6 +30,7 @@ if(NOT NM_TARGETCREATION_CMAKE_INCLUDED)
   set(NM_EMPTY_CPP_FILE ${CMAKE_CURRENT_LIST_DIR}/empty.cpp)
 
   include(${CMAKE_CURRENT_LIST_DIR}/CompilerFlags.cmake)
+  include(${CMAKE_CURRENT_LIST_DIR}/Platform.cmake)
   set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
   function(nm_add_library NAME KIND)
@@ -38,12 +39,25 @@ if(NOT NM_TARGETCREATION_CMAKE_INCLUDED)
     set(nm_target_include_dir "${PROJECT_SOURCE_DIR}/include/${FOLDER_NAME}")
     file(GLOB LIBRARY_HEADERS "${nm_target_include_dir}/*.h")
 
-    add_library(${NAME} ${KIND} ${LIBRARY_HEADERS} ${ARGN})
+    if(${KIND} STREQUAL "OBJECT-STATIC" OR ${KIND} STREQUAL "OBJECT-SHARED")
+      set(simple_kind "OBJECT")
+    else()
+      set(simple_kind ${KIND})
+    endif()
+
+    add_library(${NAME} ${simple_kind} ${LIBRARY_HEADERS} ${ARGN})
     set_property(TARGET "${NAME}" PROPERTY FOLDER "Libraries/${FOLDER_NAME}")
     set_property(TARGET "${NAME}" PROPERTY PROJECT_LABEL "Library")
 
-    if(NOT ${KIND} STREQUAL "OBJECT")
+    if(NOT ${simple_kind} STREQUAL "OBJECT")
       target_link_libraries(${NAME} ${NM_THIRDPARTY_LIBS})
+    endif()
+
+    # When building Linux shared objects with OBJECT libraries, -fPIC needs
+    # to be passed to the compiler explicitly:
+    if(${KIND} STREQUAL "OBJECT-SHARED"
+       AND NM_COMPILING_WITH_GNULIKE AND NM_PLATFORM_REQUIRES_EXTRA_PIC_FOR_DSO)
+      target_compile_options(${NAME} PRIVATE -fPIC)
     endif()
 
     target_compile_options(${NAME} PUBLIC ${NM_LIB_COMPILER_FLAGS})
