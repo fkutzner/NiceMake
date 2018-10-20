@@ -17,7 +17,16 @@ mkdir thirdparty-lib && cd thirdparty-lib
 cmake ${TEST_PROJECT_DIR}
 cmake --build .
 
-EXPECTED_ARTIFACTS_FILE=${TEST_PROJECT_DIR}/../testconfigs/ExpectedArtifacts.$(uname)
+host_os=$(uname)
+if [[ ${host_os} == CYGWIN* ]]
+then
+  host_os=Cygwin
+elif [[ ${host_os} == MSYS* ]]
+then
+  host_os=MSys
+fi
+
+EXPECTED_ARTIFACTS_FILE=${TEST_PROJECT_DIR}/../testconfigs/ExpectedArtifacts.${host_os}
 source ${CHECK_RESULTS_LIB}
 
 echo "Checking results..."

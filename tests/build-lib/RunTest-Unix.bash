@@ -18,7 +18,16 @@ mkdir build-lib-${MODE} && cd build-lib-${MODE}
 cmake -DLIB_BUILD_MODE=${MODE} ${TEST_PROJECT_DIR}
 cmake --build .
 
-EXPECTED_ARTIFACTS_FILE=${TEST_PROJECT_DIR}/../testconfigs/${MODE}/ExpectedArtifacts.$(uname)
+host_os=$(uname)
+if [[ ${host_os} == CYGWIN* ]]
+then
+  host_os=Cygwin
+elif [[ ${host_os} == MSYS* ]]
+then
+  host_os=MSys
+fi
+
+EXPECTED_ARTIFACTS_FILE=${TEST_PROJECT_DIR}/../testconfigs/${MODE}/ExpectedArtifacts.${host_os}
 source ${CHECK_RESULTS_LIB}
 
 echo "Checking results..."
