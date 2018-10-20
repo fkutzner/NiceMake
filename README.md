@@ -1,4 +1,4 @@
-# NiceMake 0.0.0
+# NiceMake 0.1.0
 A collection of commonly useful CMake functions for C and C++ projects
 
 ## Introduction
