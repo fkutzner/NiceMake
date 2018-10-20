@@ -1,4 +1,5 @@
-# Thest that ...TODO...
+# Test that third-party libraries are linked and their exported definitions
+# are added to the target library 
 
 if(UNIX)
   add_test(
