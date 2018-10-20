@@ -266,6 +266,20 @@ does not define an interface library target:
 > the compiler options `<opt1> [<opt2> ...]` to all
 > targets linking to the interface library).
 
-
-
 ## Sanitizers
+
+NiceMake defines CMake options causing sanitizer compiler
+options to be added for all targets created with
+`nm_add_library` and `nm_add_tool`, and to the linker
+invocation. The default value of all sanitizer options
+is `OFF`.
+
+* `${NM_OPT_PREFIX}_ENABLE_ASAN=ON` causes the address
+  sanitizer to be enabled when compiling with Clang or GCC.
+* `${NM_OPT_PREFIX}_ENABLE_MSAN=ON` causes the memory
+  sanitizer to be enabled when compiling with Clang or GCC.
+* `${NM_OPT_PREFIX}_ENABLE_TSAN=ON` causes the thread
+  sanitizer to be enabled when compiling with Clang or GCC.
+* `${NM_OPT_PREFIX}_ENABLE_UBSAN=ON` causes the
+  undefined-behaviour sanitizer to be enabled when
+  compiling with Clang or GCC.
