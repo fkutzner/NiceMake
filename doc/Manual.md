@@ -216,4 +216,56 @@ libraries.
 
 ## Using third-party libraries
 
+NiceMake provides a function for adding third-party
+libraries which need to be linked to all targets defined
+via the `nm_add_library` and `nm_add_tool` functions.
+
+The simpler variant can be used e.g. for libraries
+looked up via CMake's `find_module` function and having
+a modern module script (i.e. defining an interface library
+target exporting the library's include directories and
+compiler options):
+
+> `nm_add_thirdparty_libs(LIBS <lib1> [<lib2> ...])`
+>
+> Adds all arguments to the list of libraries to be
+> linked to tool or library targets (see the
+> `nm_add_library` and `nm_add_tool` functions) defined in
+> the current directory and its subdirectories. The added
+> libraries are collected in the variable
+> `NM_THIRDPARTY_LIBS`.
+>
+> Note: this variant of `nm_add_thirdparty_libs` should
+> only be used for arguments `<lib1> [<lib2> ...]`
+> specifying CMake targets exporting the rsp. library's
+> include directories and compiler flags.
+
+The second variant is useful for libraries that do not
+have a CMake module script, or whose CMake module script
+does not define an interface library target:
+
+> `nm_add_thirdparty_libs(NAME <name> LIBS <lib1> [<lib2> ...] [INTERFACE_INCLUDE_DIRS <dir1> [<dir2> ...]] [INTERFACE_COMPILE_OPTIONS <opt1> [<opt2> ...]])`
+>
+> Creates an `INTERFACE` library target `<name>`
+> and links `<name>` to `<lib1> [<lib2> ...]`.
+> Adds the created target to the list of libraries to be
+> linked to tool or library targets (see the
+> `nm_add_library` and `nm_add_tool` functions) defined in
+> the current directory and its subdirectories. The created
+> interface library is added to `NM_THIRDPARTY_LIBS`.
+>
+> If `INTERFACE_INCLUDE_DIRS` is specified, adds
+> `<dir1> [<dir2> ...]` to the interface target's
+> interface include directories (causing CMake to add
+> the include directories `<dir1> [<dir2> ...]` to all
+>  targets linking to the interface library).
+>
+> If `INTERFACE_COMPILE_OPTIONS` is specified, adds
+> `<opt1> [<opt2> ...]` to the interface target's
+> interface compiler options (causing CMake to add
+> the compiler options `<opt1> [<opt2> ...]` to all
+> targets linking to the interface library).
+
+
+
 ## Sanitizers
