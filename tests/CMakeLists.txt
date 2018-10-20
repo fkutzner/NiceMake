@@ -31,3 +31,4 @@ project(nicemake-tests)
 enable_testing()
 
 add_subdirectory(build-lib)
+add_subdirectory(build-tool)
