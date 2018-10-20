@@ -194,6 +194,25 @@ Following the project layout, invoke
 Following the project layout, invoke
 `nm_add_tool(<a> ...)` in `tools/<a>`.
 
+## Compiler and platform detection helpers
+
+NiceMake defines the following variables to facilitate
+detecting the compiler:
+
+* `NM_COMPILING_WITH_CLANG` is set to `true` iff the compiler
+is `Clang` or `AppleClang`.
+* `NM_COMPILING_WITH_GXX` is set to `true` iff the compiler
+is `GNU` (i.e. `gcc`).
+* `NM_COMPILING_WITH_GNULIKE` is set to `true` iff the compiler
+is `GNU`, `Clang` or `AppleClang`.
+* `NM_COMPILING_WITH_MSVC` is set to `true` iff the compiler
+is Visual C++.
+
+Furthermore, `NM_PLATFORM_REQUIRES_EXTRA_PIC_FOR_DSO` is set
+to `true` iff the project is compiled on a Unix-like system
+with Clang or GCC and the compiler option `-fPIC` is required
+to be used with `OBJECT` targets which are used in shared
+libraries.
 
 ## Using third-party libraries
 
