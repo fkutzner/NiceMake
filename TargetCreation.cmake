@@ -51,6 +51,25 @@ if(NOT NM_TARGETCREATION_CMAKE_INCLUDED)
 
     if(NOT ${simple_kind} STREQUAL "OBJECT")
       target_link_libraries(${NAME} ${NM_THIRDPARTY_LIBS})
+    else()
+      # Import interface definitions
+      foreach(third_party_lib ${NM_THIRDPARTY_LIBS})
+        get_target_property(interface_includes ${third_party_lib} INTERFACE_INCLUDE_DIRECTORIES)
+        get_target_property(interface_comp_opts ${third_party_lib} INTERFACE_COMPILE_OPTIONS)
+        get_target_property(interface_comp_defs ${third_party_lib} INTERFACE_COMPILE_DEFINITIONS)
+
+        if(interface_includes)
+          target_include_directories(${NAME} PRIVATE ${interface_includes})
+        endif()
+
+        if(interface_comp_opts)
+          target_compile_options(${NAME} PRIVATE ${interface_comp_opts})
+        endif()
+
+        if(interface_comp_defs)
+          target_compile_definitions(${NAME} PRIVATE ${interface_comp_defs})
+        endif()
+      endforeach()
     endif()
 
     # When building Linux shared objects with OBJECT libraries, -fPIC needs
