@@ -26,19 +26,26 @@
 # other dealings in this Software without prior written authorization.
 
 if(NOT NM_COMPILERFLAGS_CMAKE_INCLUDED)
-  set(NM_LIB_COMPILER_FLAGS)
+  set(NM_LIB_COMPILER_FLAGS_PRIVATE)
+  set(NM_LIB_COMPILER_FLAGS_PUBLIC)
+  set(NM_LIB_COMPILER_FLAGS_INTERFACE)
   set(NM_TOOL_COMPILER_FLAGS)
 
-  macro(nm_add_lib_compiler_flags)
-    list(APPEND NM_LIB_COMPILER_FLAGS ${ARGN})
+  macro(nm_add_lib_compiler_flags KIND)
+    if((NOT "${KIND}" STREQUAL "PRIVATE")
+       AND (NOT "${KIND}" STREQUAL "PUBLIC")
+       AND (NOT "${KIND}" STREQUAL "INTERFACE"))
+      message(FATAL_ERROR "nm_add_compiler_flags: KIND must be one of PRIVATE, PUBLIC or INTERFACE (is: ${KIND})")
+    endif()
+    list(APPEND NM_LIB_COMPILER_FLAGS_${KIND} ${ARGN})
   endmacro()
 
   macro(nm_add_tool_compiler_flags)
     list(APPEND NM_TOOL_COMPILER_FLAGS ${ARGN})
   endmacro()
 
-  macro(nm_add_compiler_flags)
-    nm_add_lib_compiler_flags(${ARGN})
+  macro(nm_add_compiler_flags KIND)
+    nm_add_lib_compiler_flags(${KIND} ${ARGN})
     nm_add_tool_compiler_flags(${ARGN})
   endmacro()
 

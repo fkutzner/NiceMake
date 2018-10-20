@@ -117,13 +117,19 @@ tools and libraries using the functions
 `nm_add_lib_compiler_flags`, `nm_add_tool_compiler_flags`
 and `nm_add_compiler_flags`:
 
-> `nm_add_lib_compiler_flags(<flag1> [<flag2> ...])`
+> `nm_add_lib_compiler_flags(<kind> <flag1> [<flag2> ...])`
 >
 > Adds all arguments to the list of compiler flags
 > to be used with library targets (see `nm_add_library()`)
 > defined in the current directory and its subdirectories.
+>
+> `<kind>` must be one of `PRIVATE`, `PUBLIC` and `INTERFACE`
+> and controls whether the flags are added as private, public
+> or interface compile options (see the documentation of
+> `target_compile_options()`).
+>
 > The compiler flags are collected in the variable
-> `NM_LIB_COMPILER_FLAGS`.
+> `NM_LIB_COMPILER_FLAGS_<kind>`.
 
 > `nm_add_tool_compiler_flags(<flag1> [<flag2> ...])`
 >
@@ -162,9 +168,10 @@ third-party libraries:
 > are set up for the created target such that the objects
 > can be used in a shared library.
 >
-> The compiler flags previously passed to the
-> `nm_add_lib_compiler_flags()` function are added to the
-> created target.
+> The compiler flags previously passed to
+> `nm_add_lib_compiler_flags(<kind> ...)` are added to the
+> created target via
+> `target_compile_options(<name> <kind> ...)`.
 >
 > If the created target is not an `OBJECT` or `OBJECT-SHARED`
 > library, all third-party libraries previously registered via

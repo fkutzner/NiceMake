@@ -79,7 +79,10 @@ if(NOT NM_TARGETCREATION_CMAKE_INCLUDED)
       target_compile_options(${NAME} PRIVATE -fPIC)
     endif()
 
-    target_compile_options(${NAME} PUBLIC ${NM_LIB_COMPILER_FLAGS})
+    target_compile_options(${NAME} PUBLIC ${NM_LIB_COMPILER_FLAGS_PUBLIC})
+    target_compile_options(${NAME} PRIVATE ${NM_LIB_COMPILER_FLAGS_PRIVATE})
+    target_compile_options(${NAME} INTERFACE ${NM_LIB_COMPILER_FLAGS_INTERFACE})
+
     target_include_directories(${NAME} PUBLIC ${PROJECT_SOURCE_DIR}/include)
   endfunction()
 

@@ -4,7 +4,7 @@ include(../../../NiceMake.cmake)
 
 option(LIB_BUILD_MODE "The library build mode (STATIC, SHARED, OBJECT, OBJECT-STATIC or OBJECT-SHARED)" "STATIC")
 
-nm_add_lib_compiler_flags(-DMAGIC_NUMBER=42)
+nm_add_lib_compiler_flags(PUBLIC -DMAGIC_NUMBER=42)
 add_subdirectory(lib)
 
 if((LIB_BUILD_MODE STREQUAL "STATIC") OR (LIB_BUILD_MODE STREQUAL "SHARED"))

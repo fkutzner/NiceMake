@@ -8,3 +8,8 @@ The format of this file is based on [Keep a Changelog 1.0.0](https://keepachange
   adding it to the build
 - `nm_add_header_only_library`, a function for defining header-only library
   targets
+
+### Changed
+- `nm_add_lib_compiler_flags` now expects `PRIVATE`,
+  `PUBLIC` or `INTERFACE` as its first argument, controlling
+  the export of compiler flags.
