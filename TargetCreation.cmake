@@ -87,6 +87,10 @@ if(NOT NM_TARGETCREATION_CMAKE_INCLUDED)
     nm_add_library(${NAME} STATIC ${NM_EMPTY_CPP_FILE})
   endfunction()
 
+  function(nm_add_header_only_library NAME KIND)
+    nm_add_library(${NAME} ${KIND} ${NM_EMPTY_CPP_FILE} ${ARGN})
+  endfunction()
+
   function(nm_add_tool NAME)
     string(REPLACE "." "/" FOLDER_NAME ${NAME})
 

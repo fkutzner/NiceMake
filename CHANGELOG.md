@@ -6,3 +6,5 @@ The format of this file is based on [Keep a Changelog 1.0.0](https://keepachange
 ### Added
 - `nm_add_gtest`, a function downloading Google Test and
   adding it to the build
+- `nm_add_header_only_library`, a function for defining header-only library
+  targets

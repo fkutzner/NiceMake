@@ -183,6 +183,25 @@ third-party libraries:
 Following the project layout, invoke
 `nm_add_library(<a>.<b>.<c> ...)` in `lib/<a>/<b>/<c>`.
 
+Since CMake requires each library to have at least one non-header source file,
+NiceMake provides a shorthand for creating libraries containing an empty C++
+source file:
+
+> `nm_add_header_only_library(<name> <kind> <header1> [<header2> ...])`
+>
+> Invokes `nm_add_library(<name> <kind> <E> <header1> [<header2> ...])`
+> with `<E>` being the path of an empty C++ file provided by NiceMake.
+
+
+Note: `nm_add_library` automatically adds the include files contained in the
+directory within `include` corresponding to `<name>`. Thus, usually, invoking
+`nm_add_library(somename somekind)` will suffice to create a header-only
+library target. Even if you don't link the target to anything, this creates
+a target exporting interface definitions. Plus, the header-only library
+becomes visible in IDEs.
+
+Add executable binaries using `nm_add_tool`:
+
 > `nm_add_tool(<name> <source1> [<source2> ...])`
 >
 > Defines an executable target `<name>` with the source
