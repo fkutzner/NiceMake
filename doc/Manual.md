@@ -95,6 +95,35 @@ including `NiceMake.cmake`:
 To use NiceMake in your CMake project, include the file
 `NiceMake.cmake`.
 
+## Setting compiler options
+
+Compiler options can be separately defined for
+tools and libraries using the functions
+`nm_add_lib_compiler_flags`, `nm_add_tool_compiler_flags`
+and `nm_add_compiler_flags`:
+
+> `nm_add_lib_compiler_flags(<flag1> [<flag2> ...])`
+>
+> Adds all arguments to the list of compiler flags
+> to be used with library targets (see `nm_add_library()`)
+> defined in the current directory and its subdirectories.
+> The compiler flags are collected in the variable
+> `NM_LIB_COMPILER_FLAGS`.
+
+> `nm_add_tool_compiler_flags(<flag1> [<flag2> ...])`
+>
+> Adds all arguments to the list of compiler flags
+> to be used with tool targets (see `nm_add_tool()`)
+> defined in the current directory and its subdirectories.
+> The compiler flags are collected in the variable
+> `NM_TOOL_COMPILER_FLAGS`.
+
+> `nm_add_compiler_flags(<flag1> [<flag2> ...])`
+>
+> Shorthand for invoking `nm_add_lib_compiler_flags`
+> and `nm_add_tool_compiler_flags`, passing all arguments
+> to both functions.
+
 ## Defining libraries and tools
 
 NiceMake provides thin wrappers around
