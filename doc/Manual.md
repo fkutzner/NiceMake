@@ -119,12 +119,12 @@ third-party libraries:
 > can be used in a shared library.
 >
 > The compiler flags previously passed to the
-> `nm_add_lib_compiler_flags` function are added to the
+> `nm_add_lib_compiler_flags()` function are added to the
 > created target.
 >
 > If the created target is not an `OBJECT` or `OBJECT-SHARED`
-> library, all third-party libraries previously registered with
-> `nm_add_thirdparty_libs` are linked to the target.
+> library, all third-party libraries previously registered via
+> `nm_add_thirdparty_libs()` are linked to the target.
 >
 > Let `<path>` be the
 > result of substituting all dot characters in `<name>`
@@ -132,6 +132,38 @@ third-party libraries:
 > All header files contained in `include/<path>` are added
 > to the target as source files. The created target is added
 > to the CMake folder `Libraries/<path>`.
+>
+> The toplevel directory `include` is added to the
+> created target's include directories.
+
+Following the project layout, invoke
+`nm_add_library(<a>.<b>.<c> ...)` in `lib/<a>/<b>/<c>`.
+
+> `nm_add_tool(<name> <source1> [<source2> ...])`
+>
+> Defines an executable target `<name>` with the source
+> files `<source1> [<source2> ...]` using CMake's
+> `add_executable` function.
+>
+> The compiler flags previously passed to the
+> `nm_add_lib_compiler_flags()` function are added to the
+> created target.
+>
+> All third-party libraries previously registered via
+> `nm_add_thirdparty_libs()` are linked to the target.
+>
+> Let `<path>` be the
+> result of substituting all dot characters in `<name>`
+> by path separators.
+> All header files contained in `tools/<path>` are added
+> to the target as source files. The created target is added
+> to the CMake folder `Tools/<path>`.
+>
+> The toplevel directory `include` is added to the
+> created target's include directories.
+
+Following the project layout, invoke
+`nm_add_tool(<a> ...)` in `tools/<a>`.
 
 
 ## Using third-party libraries
