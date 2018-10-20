@@ -33,7 +33,7 @@ is difficult to escape.
 ## Documentation
 
 See the [NiceMake manual](doc/Manual.md). There is also
-a [Changelog](Changelog.md).
+a [Changelog](CHANGELOG.md).
 
 ## Requirements
 
