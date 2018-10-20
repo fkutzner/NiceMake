@@ -1,0 +1,2 @@
+File lib/testlib.testmodule.lib
+Executable bin/run.exe 42

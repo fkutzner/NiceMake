@@ -1,0 +1,2 @@
+File lib/libtestlib.testmodule.a
+Executable bin/run 42
