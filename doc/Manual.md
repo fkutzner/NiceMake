@@ -94,3 +94,46 @@ including `NiceMake.cmake`:
 
 To use NiceMake in your CMake project, include the file
 `NiceMake.cmake`.
+
+## Defining libraries and tools
+
+NiceMake provides thin wrappers around
+CMake's [add_library](https://cmake.org/cmake/help/v3.10/command/add_library.html)
+and [add_executable](https://cmake.org/cmake/help/v3.10/command/add_executable.html)
+functions, automatically adding public header files,
+compiler options, include directories and links to
+third-party libraries:
+
+> `nm_add_library(<name> [STATIC | SHARED | MODULE | OBJECT |  OBJECT-SHARED] <source1> [<source2> ...])`
+>
+> Defines a library target `<name>` with the source
+> files `<source1> [<source2> ...]` using CMake's
+> `add_library` function.
+>
+> If the first argument is `STATIC`, `SHARED`,
+> `MODULE` or `OBJECT`, the first argument is directly
+> passed as the first argument to `add_library`.
+> Otherwise, if it is `OBJECT-SHARED`, `OBJECT` is passed
+> as the first argument to `add_library` and compiler flags
+> are set up for the created target such that the objects
+> can be used in a shared library.
+>
+> The compiler flags previously passed to the
+> `nm_add_lib_compiler_flags` function are added to the
+> created target.
+>
+> If the created target is not an `OBJECT` or `OBJECT-SHARED`
+> library, all third-party libraries previously registered with
+> `nm_add_thirdparty_libs` are linked to the target.
+>
+> Let `<path>` be the
+> result of substituting all dot characters in `<name>`
+> by path separators.
+> All header files contained in `include/<path>` are added
+> to the target as source files. The created target is added
+> to the CMake folder `Libraries/<path>`.
+
+
+## Using third-party libraries
+
+## Sanitizers
