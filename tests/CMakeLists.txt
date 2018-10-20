@@ -32,3 +32,4 @@ enable_testing()
 
 add_subdirectory(build-lib)
 add_subdirectory(build-tool)
+add_subdirectory(thirdparty-lib)
