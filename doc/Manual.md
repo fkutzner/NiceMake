@@ -11,6 +11,7 @@ Table of contents:
 * [7. Compiler and platform detection helpers](#compiler-and-platform-detection-helpers)
 * [8. Using third-party libraries](#using-third-party-libraries)
 * [9. Sanitizers](#sanitizers)
+* [10. Adding Google Test to your project](#adding-google-test-to-your-project)
 
 ## Supported platforms
 
@@ -101,6 +102,8 @@ including `NiceMake.cmake`:
 | Variable | Description | Default value |
 |----------------------------------------|
 | `NM_CONF_OPTION_PREFIX` | Prefix for CMake options defined by NiceMake | `${CMAKE_PROJECT_NAME}` |
+| `NM_CONF_GTEST_REPOSITORY` | The Google Test repository from which to download Google Test | `https://github.com/google/googletest.git` |
+| `NM_CONF_GTEST_TAG` | The Google Test version tag to be fetched | `release-1.8.1` |
 
 ## Using NiceMake in CMake projects
 
@@ -295,3 +298,20 @@ is `OFF`.
 * `${NM_OPT_PREFIX}_ENABLE_UBSAN=ON` causes the
   undefined-behaviour sanitizer to be enabled when
   compiling with Clang or GCC.
+
+## Adding Google Test to your project
+
+NiceMake has a function for downloading [Google Test](https://github.com/google/googletest) and adding it to your project:
+
+> `nm_add_gtest()`
+>
+> Downloads Google Test from ${NM_CONF_GTEST_REPOSITORY}
+> at tag ${NM_CONF_GTEST_TAG} (see [Configuring
+> NiceMake](#configuring-nicemake)) at configure time
+> and adds its source directory via `add_subdirectory`.
+> Google Test is compiled used the compiler flags set up
+> via `nm_add_tool_compiler_flags()`.
+>
+> After executing this function, the targets `gtest` and
+> `gtest_main` are available, exporting their include
+> directories in their interface.

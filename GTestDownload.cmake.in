@@ -1,0 +1,15 @@
+cmake_minimum_required(VERSION 3.10)
+project(gtest-download)
+
+include(ExternalProject)
+
+ExternalProject_Add(googletest
+  GIT_REPOSITORY    "${NM_CONF_GTEST_REPOSITORY}"
+  GIT_TAG           "${NM_CONF_GTEST_TAG}"
+  SOURCE_DIR        "${CMAKE_BINARY_DIR}/gtest-src-wrap/gtest-src"
+  BINARY_DIR        "${CMAKE_BINARY_DIR}/gtest-build"
+  CONFIGURE_COMMAND ""
+  BUILD_COMMAND     ""
+  INSTALL_COMMAND   ""
+  TEST_COMMAND      ""
+)
