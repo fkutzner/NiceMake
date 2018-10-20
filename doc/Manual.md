@@ -148,8 +148,8 @@ and `nm_add_compiler_flags`:
 ## Defining libraries and tools
 
 NiceMake provides thin wrappers around
-CMake's [add_library](https://cmake.org/cmake/help/v3.10/command/add_library.html)
-and [add_executable](https://cmake.org/cmake/help/v3.10/command/add_executable.html)
+CMake's [add_library](https://cmake.org/cmake/help/v3.6/command/add_library.html)
+and [add_executable](https://cmake.org/cmake/help/v3.6/command/add_executable.html)
 functions, automatically adding public header files,
 compiler options, include directories and links to
 third-party libraries:

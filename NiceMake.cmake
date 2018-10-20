@@ -26,7 +26,7 @@
 # other dealings in this Software without prior written authorization.
 
 if(NOT NM_NICEMAKE_CMAKE_INCLUDED)
-  cmake_minimum_required(VERSION 3.10 FATAL_ERROR)
+  cmake_minimum_required(VERSION 3.6 FATAL_ERROR)
 
   include(${CMAKE_CURRENT_LIST_DIR}/Platform.cmake)
   include(${CMAKE_CURRENT_LIST_DIR}/CompilerFlags.cmake)

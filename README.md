@@ -37,7 +37,7 @@ a [Changelog](CHANGELOG.md).
 
 ## Requirements
 
-NiceMake 0.0.1 requires CMake version 3.10.
+NiceMake 0.0.1 requires CMake version 3.6.
 
 ## Getting started
 
