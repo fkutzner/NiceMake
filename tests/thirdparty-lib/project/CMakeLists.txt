@@ -2,6 +2,9 @@ cmake_minimum_required(VERSION 3.10)
 project(build-lib)
 include(../../../NiceMake.cmake)
 
+# For SymbolVisibility.h:
+include_directories(../../include)
+
 add_subdirectory(dummy-thirdparty-libs)
 
 nm_add_thirdparty_libs(LIBS modern-thirdparty-lib)

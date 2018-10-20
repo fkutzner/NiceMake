@@ -1,3 +1,5 @@
 #pragma once
 
-int getMagicNumberShared();
+#include <SymbolVisibility.h>
+
+extern NM_PUBLIC_API int getMagicNumberShared();
