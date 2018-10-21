@@ -106,6 +106,7 @@ including `NiceMake.cmake`:
 | `NM_CONF_GTEST_REPOSITORY` | The Google Test repository from which to download Google Test | `https://github.com/google/googletest.git` |
 | `NM_CONF_GTEST_TAG` | The Google Test version tag to be fetched | `release-1.8.1` |
 | `NM_CONF_DONT_SET_OUTPUT_DIR` | Don't set the build output directory to `bin/` | `OFF` |
+| `NM_CONF_DONT_DEFINE_SANITIZER_OPTIONS` | Don't add the sanitizer options to the public CMake options | `FALSE` |
 
 ## Using NiceMake in CMake projects
 
@@ -361,6 +362,13 @@ is `OFF`.
 * `${NM_OPT_PREFIX}_ENABLE_UBSAN=ON` causes the
   undefined-behaviour sanitizer to be enabled when
   compiling with Clang or GCC.
+
+Exporting the sanitizer-related options as CMake options can
+be disabled by setting `NM_CONF_DONT_DEFINE_SANITIZER_OPTIONS` to
+`TRUE` before including `NiceMake.cmake`. When doing so, the
+NiceMake sanitizer options can still be set programmatically, e.g. by
+executing `set(${NM_OPT_PREFIX}_ENABLE_ASAN TRUE)` before including
+`NiceMake.cmake`.
 
 ## Adding Google Test to your project
 

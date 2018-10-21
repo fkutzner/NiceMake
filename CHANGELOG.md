@@ -10,6 +10,7 @@ The format of this file is based on [Keep a Changelog 1.0.0](https://keepachange
   targets
 - Testing on Cygwin
 - Added `nm_add_compile_definitions` and `nm_add_tool_compile_definitions`
+- Add option for suppressing sanitizer CMake option exports
 
 ### Changed
 - Renamed `nm_add_lib_compiler_flags` to `nm_add_lib_compile_options` and
