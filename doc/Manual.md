@@ -15,15 +15,16 @@ Table of contents:
 
 ## Supported platforms
 
-NiceMake currently supports the following platforms:
+NiceMake is regularly tested on the following platforms:
 
 * Apple macOS (clang, gcc)
 * GNU/Linux (clang, gcc)
 * Microsoft Windows (Visual C++)
+* Cygwin (gcc)
 
 Planned:
 
-* Microsoft Windows: Cygwin, MinGW
+* Microsoft Windows: MinGW, MSys2
 
 ## Project layout
 
