@@ -26,10 +26,10 @@
 # other dealings in this Software without prior written authorization.
 
 if(NOT NM_COMPILERFLAGS_CMAKE_INCLUDED)
-  set(NM_LIB_COMPILER_FLAGS_PRIVATE)
-  set(NM_LIB_COMPILER_FLAGS_PUBLIC)
-  set(NM_LIB_COMPILER_FLAGS_INTERFACE)
-  set(NM_TOOL_COMPILER_FLAGS)
+  set(NM_LIB_COMPILE_OPTS_PRIVATE)
+  set(NM_LIB_COMPILE_OPTS_PUBLIC)
+  set(NM_LIB_COMPILE_OPTS_INTERFACE)
+  set(NM_TOOL_COMPILE_OPTS)
 
   set(NM_LIB_COMPILER_DEFS_PRIVATE)
   set(NM_LIB_COMPILER_DEFS_PUBLIC)
@@ -37,41 +37,41 @@ if(NOT NM_COMPILERFLAGS_CMAKE_INCLUDED)
   set(NM_TOOL_COMPILER_DEFS)
 
 
-  macro(nm_add_lib_compiler_flags SCOPE)
+  macro(nm_add_lib_compile_options SCOPE)
     if((NOT "${SCOPE}" STREQUAL "PRIVATE")
        AND (NOT "${SCOPE}" STREQUAL "PUBLIC")
        AND (NOT "${SCOPE}" STREQUAL "INTERFACE"))
-      message(FATAL_ERROR "nm_add_compiler_flags: SCOPE must be one of PRIVATE, PUBLIC or INTERFACE (is: ${SCOPE})")
+      message(FATAL_ERROR "nm_add_compile_options: SCOPE must be one of PRIVATE, PUBLIC or INTERFACE (is: ${SCOPE})")
     endif()
-    list(APPEND NM_LIB_COMPILER_FLAGS_${SCOPE} ${ARGN})
+    list(APPEND NM_LIB_COMPILE_OPTS_${SCOPE} ${ARGN})
   endmacro()
 
-  macro(nm_add_tool_compiler_flags)
-    list(APPEND NM_TOOL_COMPILER_FLAGS ${ARGN})
+  macro(nm_add_tool_compile_options)
+    list(APPEND NM_TOOL_COMPILE_OPTS ${ARGN})
   endmacro()
 
-  macro(nm_add_compiler_flags SCOPE)
-    nm_add_lib_compiler_flags(${SCOPE} ${ARGN})
-    nm_add_tool_compiler_flags(${ARGN})
+  macro(nm_add_compile_options SCOPE)
+    nm_add_lib_compile_options(${SCOPE} ${ARGN})
+    nm_add_tool_compile_options(${ARGN})
   endmacro()
 
 
-  macro(nm_add_lib_compiler_definitions SCOPE)
+  macro(nm_add_lib_compile_definitions SCOPE)
     if((NOT "${SCOPE}" STREQUAL "PRIVATE")
        AND (NOT "${SCOPE}" STREQUAL "PUBLIC")
        AND (NOT "${SCOPE}" STREQUAL "INTERFACE"))
-      message(FATAL_ERROR "nm_add_compiler_definitions: SCOPE must be one of PRIVATE, PUBLIC or INTERFACE (is: ${SCOPE})")
+      message(FATAL_ERROR "nm_add_compile_definitions: SCOPE must be one of PRIVATE, PUBLIC or INTERFACE (is: ${SCOPE})")
     endif()
     list(APPEND NM_LIB_COMPILER_DEFS_${SCOPE} ${ARGN})
   endmacro()
 
-  macro(nm_add_tool_compiler_definitions)
+  macro(nm_add_tool_compile_definitions)
     list(APPEND NM_TOOL_COMPILER_DEFS ${ARGN})
   endmacro()
 
-  macro(nm_add_compiler_definitions SCOPE)
-    nm_add_lib_compiler_definitions(${SCOPE} ${ARGN})
-    nm_add_tool_compiler_definitions(${ARGN})
+  macro(nm_add_compile_definitions SCOPE)
+    nm_add_lib_compile_definitions(${SCOPE} ${ARGN})
+    nm_add_tool_compile_definitions(${ARGN})
   endmacro()
 
 

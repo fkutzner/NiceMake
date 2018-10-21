@@ -1,7 +1,7 @@
 # When obtaining gtest with NiceMake, this file will be copied into the
 # build directory gtest-src-wrap, which contains the gtest source code in
-# a subdirectory gtest-src. This file is used to add the NM_TOOL_COMPILER_FLAGS
+# a subdirectory gtest-src. This file is used to add the NM_TOOL_COMPILE_OPTS
 # to the gtest compilation process.
 
-add_definitions(${NM_TOOL_COMPILER_FLAGS})
+add_definitions(${NM_TOOL_COMPILE_OPTS})
 add_subdirectory(gtest-src)

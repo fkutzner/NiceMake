@@ -116,10 +116,10 @@ To use NiceMake in your CMake project, include the file
 
 Compiler options can be separately defined for
 tools and libraries using the functions
-`nm_add_lib_compiler_flags`, `nm_add_tool_compiler_flags`
-and `nm_add_compiler_flags`:
+`nm_add_lib_compile_options`, `nm_add_tool_compile_options`
+and `nm_add_compile_options`:
 
-> `nm_add_lib_compiler_flags(<kind> <flag1> [<flag2> ...])`
+> `nm_add_lib_compile_options(<kind> <flag1> [<flag2> ...])`
 >
 > Adds all arguments to the list of compiler flags
 > to be used with library targets (see `nm_add_library()`)
@@ -131,29 +131,29 @@ and `nm_add_compiler_flags`:
 > `target_compile_options()`).
 >
 > The compiler flags are collected in the variable
-> `NM_LIB_COMPILER_FLAGS_<kind>`.
+> `NM_LIB_COMPILE_OPTS_<kind>`.
 
-> `nm_add_tool_compiler_flags(<flag1> [<flag2> ...])`
+> `nm_add_tool_compile_options(<flag1> [<flag2> ...])`
 >
 > Adds all arguments to the list of compiler flags
 > to be used with tool targets (see `nm_add_tool()`)
 > defined in the current directory and its subdirectories.
 >
 > The compiler flags are collected in the variable
-> `NM_TOOL_COMPILER_FLAGS`.
+> `NM_TOOL_COMPILE_OPTS`.
 
-> `nm_add_compiler_flags(<flag1> [<flag2> ...])`
+> `nm_add_compile_options(<flag1> [<flag2> ...])`
 >
-> Shorthand for invoking `nm_add_lib_compiler_flags`
-> and `nm_add_tool_compiler_flags`, passing all arguments
+> Shorthand for invoking `nm_add_lib_compile_options`
+> and `nm_add_tool_compile_options`, passing all arguments
 > to both functions.
 
 Similarly, definitions (in the sense of [CMake compile
 definitions](https://cmake.org/cmake/help/v3.6/command/add_definitions.html))
-can be added via `nm_add_lib_compiler_definitions`,
-`nm_add_tool_compiler_definitions` and `nm_add_compiler_definitions`:
+can be added via `nm_add_lib_compile_definitions`,
+`nm_add_tool_compile_definitions` and `nm_add_compile_definitions`:
 
-> `nm_add_lib_compiler_definitions(<kind> <flag1> [<flag2> ...])`
+> `nm_add_lib_compile_definitions(<kind> <flag1> [<flag2> ...])`
 >
 > Adds all arguments to the list of compiler definitions
 > to be used with library targets (see `nm_add_library()`)
@@ -167,7 +167,7 @@ can be added via `nm_add_lib_compiler_definitions`,
 > The compiler definitions are collected in the variable
 > `NM_LIB_COMPILER_DEFS_<kind>`.
 
-> `nm_add_tool_compiler_definitions(<flag1> [<flag2> ...])`
+> `nm_add_tool_compile_definitions(<flag1> [<flag2> ...])`
 >
 > Adds all arguments to the list of compiler definitions
 > to be used with tool targets (see `nm_add_tool()`)
@@ -176,10 +176,10 @@ can be added via `nm_add_lib_compiler_definitions`,
 > The compiler definitions are collected in the variable
 > `NM_TOOL_COMPILER_DEFS`.
 
-> `nm_add_compiler_definitions(<flag1> [<flag2> ...])`
+> `nm_add_compile_definitions(<flag1> [<flag2> ...])`
 >
-> Shorthand for invoking `nm_add_lib_compiler_definitions`
-> and `nm_add_tool_compiler_definitions`, passing all arguments
+> Shorthand for invoking `nm_add_lib_compile_definitions`
+> and `nm_add_tool_compile_definitions`, passing all arguments
 > to both functions.
 
 ## Defining libraries and tools
@@ -206,7 +206,7 @@ third-party libraries:
 > can be used in a shared library.
 >
 > The compiler flags previously passed to
-> `nm_add_lib_compiler_flags(<kind> ...)` are added to the
+> `nm_add_lib_compile_options(<kind> ...)` are added to the
 > created target via
 > `target_compile_options(<name> <kind> ...)`.
 >
@@ -253,7 +253,7 @@ Add executable binaries using `nm_add_tool`:
 > `add_executable` function.
 >
 > The compiler flags previously passed to the
-> `nm_add_lib_compiler_flags()` function are added to the
+> `nm_add_lib_compile_options()` function are added to the
 > created target.
 >
 > All third-party libraries previously registered via
@@ -373,7 +373,7 @@ NiceMake has a function for downloading [Google Test](https://github.com/google/
 > NiceMake](#configuring-nicemake)) at configure time
 > and adds its source directory via `add_subdirectory`.
 > Google Test is compiled used the compiler flags set up
-> via `nm_add_tool_compiler_flags()`.
+> via `nm_add_tool_compile_options()`.
 >
 > After executing this function, the targets `gtest` and
 > `gtest_main` are available, exporting their include

@@ -80,7 +80,7 @@ if(NOT NM_TARGETCREATION_CMAKE_INCLUDED)
     endif()
 
     foreach(scope IN ITEMS PUBLIC PRIVATE INTERFACE)
-      target_compile_options(${NAME} ${scope} ${NM_LIB_COMPILER_FLAGS_${scope}})
+      target_compile_options(${NAME} ${scope} ${NM_LIB_COMPILE_OPTS_${scope}})
       target_compile_definitions(${NAME} ${scope} ${NM_LIB_COMPILER_DEFS_${scope}})
     endforeach()
 
@@ -106,7 +106,7 @@ if(NOT NM_TARGETCREATION_CMAKE_INCLUDED)
     set_property(TARGET "${NAME}" PROPERTY PROJECT_LABEL "Tool")
 
     target_link_libraries(${NAME} ${NM_THIRDPARTY_LIBS})
-    target_compile_options(${NAME} PUBLIC ${NM_TOOL_COMPILER_FLAGS})
+    target_compile_options(${NAME} PUBLIC ${NM_TOOL_COMPILE_OPTS})
     target_compile_definitions(${NAME} PUBLIC ${NM_TOOL_COMPILER_DEFS})
     target_include_directories(${NAME} PUBLIC ${PROJECT_SOURCE_DIR}/include)
     target_include_directories(${NAME} PUBLIC ${nm_target_include_dir})

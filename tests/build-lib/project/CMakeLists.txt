@@ -4,12 +4,12 @@ include(../../../NiceMake.cmake)
 
 option(LIB_BUILD_MODE "The library build mode (STATIC, SHARED, OBJECT, OBJECT-STATIC or OBJECT-SHARED)" "STATIC")
 
-nm_add_lib_compiler_flags(PUBLIC -DMAGIC_NUMBER_A=21)
-nm_add_lib_compiler_definitions(PUBLIC -DMAGIC_NUMBER_B=21)
+nm_add_lib_compile_options(PUBLIC -DMAGIC_NUMBER_A=21)
+nm_add_lib_compile_definitions(PUBLIC -DMAGIC_NUMBER_B=21)
 
 if(LIB_BUILD_MODE STREQUAL "SHARED")
-  nm_add_lib_compiler_flags(PUBLIC -DNM_SHARED_LIB)
-  nm_add_lib_compiler_flags(PRIVATE -DBUILDING_NM_SHARED_LIB)
+  nm_add_lib_compile_options(PUBLIC -DNM_SHARED_LIB)
+  nm_add_lib_compile_options(PRIVATE -DBUILDING_NM_SHARED_LIB)
 endif()
 
 # For SymbolVisibility.h:
