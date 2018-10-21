@@ -9,6 +9,7 @@ The format of this file is based on [Keep a Changelog 1.0.0](https://keepachange
 - `nm_add_header_only_library`, a function for defining header-only library
   targets
 - Testing on Cygwin
+- Added `nm_add_compiler_definitions` and `nm_add_tool_compiler_definitions`
 
 ### Changed
 - `nm_add_lib_compiler_flags` now expects `PRIVATE`,

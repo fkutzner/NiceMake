@@ -138,6 +138,7 @@ and `nm_add_compiler_flags`:
 > Adds all arguments to the list of compiler flags
 > to be used with tool targets (see `nm_add_tool()`)
 > defined in the current directory and its subdirectories.
+>
 > The compiler flags are collected in the variable
 > `NM_TOOL_COMPILER_FLAGS`.
 
@@ -145,6 +146,40 @@ and `nm_add_compiler_flags`:
 >
 > Shorthand for invoking `nm_add_lib_compiler_flags`
 > and `nm_add_tool_compiler_flags`, passing all arguments
+> to both functions.
+
+Similarly, definitions (in the sense of [CMake compile
+definitions](https://cmake.org/cmake/help/v3.6/command/add_definitions.html))
+can be added via `nm_add_lib_compiler_definitions`,
+`nm_add_tool_compiler_definitions` and `nm_add_compiler_definitions`:
+
+> `nm_add_lib_compiler_definitions(<kind> <flag1> [<flag2> ...])`
+>
+> Adds all arguments to the list of compiler definitions
+> to be used with library targets (see `nm_add_library()`)
+> defined in the current directory and its subdirectories.
+>
+> `<kind>` must be one of `PRIVATE`, `PUBLIC` and `INTERFACE`
+> and controls whether the flags are added as private, public
+> or interface compile definitions (see the documentation of
+> `target_compile_definitions()`).
+>
+> The compiler definitions are collected in the variable
+> `NM_LIB_COMPILER_DEFS_<kind>`.
+
+> `nm_add_tool_compiler_definitions(<flag1> [<flag2> ...])`
+>
+> Adds all arguments to the list of compiler definitions
+> to be used with tool targets (see `nm_add_tool()`)
+> defined in the current directory and its subdirectories.
+>
+> The compiler definitions are collected in the variable
+> `NM_TOOL_COMPILER_DEFS`.
+
+> `nm_add_compiler_definitions(<flag1> [<flag2> ...])`
+>
+> Shorthand for invoking `nm_add_lib_compiler_definitions`
+> and `nm_add_tool_compiler_definitions`, passing all arguments
 > to both functions.
 
 ## Defining libraries and tools

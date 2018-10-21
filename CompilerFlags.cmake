@@ -31,23 +31,49 @@ if(NOT NM_COMPILERFLAGS_CMAKE_INCLUDED)
   set(NM_LIB_COMPILER_FLAGS_INTERFACE)
   set(NM_TOOL_COMPILER_FLAGS)
 
-  macro(nm_add_lib_compiler_flags KIND)
-    if((NOT "${KIND}" STREQUAL "PRIVATE")
-       AND (NOT "${KIND}" STREQUAL "PUBLIC")
-       AND (NOT "${KIND}" STREQUAL "INTERFACE"))
-      message(FATAL_ERROR "nm_add_compiler_flags: KIND must be one of PRIVATE, PUBLIC or INTERFACE (is: ${KIND})")
+  set(NM_LIB_COMPILER_DEFS_PRIVATE)
+  set(NM_LIB_COMPILER_DEFS_PUBLIC)
+  set(NM_LIB_COMPILER_DEFS_INTERFACE)
+  set(NM_TOOL_COMPILER_DEFS)
+
+
+  macro(nm_add_lib_compiler_flags SCOPE)
+    if((NOT "${SCOPE}" STREQUAL "PRIVATE")
+       AND (NOT "${SCOPE}" STREQUAL "PUBLIC")
+       AND (NOT "${SCOPE}" STREQUAL "INTERFACE"))
+      message(FATAL_ERROR "nm_add_compiler_flags: SCOPE must be one of PRIVATE, PUBLIC or INTERFACE (is: ${SCOPE})")
     endif()
-    list(APPEND NM_LIB_COMPILER_FLAGS_${KIND} ${ARGN})
+    list(APPEND NM_LIB_COMPILER_FLAGS_${SCOPE} ${ARGN})
   endmacro()
 
   macro(nm_add_tool_compiler_flags)
     list(APPEND NM_TOOL_COMPILER_FLAGS ${ARGN})
   endmacro()
 
-  macro(nm_add_compiler_flags KIND)
-    nm_add_lib_compiler_flags(${KIND} ${ARGN})
+  macro(nm_add_compiler_flags SCOPE)
+    nm_add_lib_compiler_flags(${SCOPE} ${ARGN})
     nm_add_tool_compiler_flags(${ARGN})
   endmacro()
+
+
+  macro(nm_add_lib_compiler_definitions SCOPE)
+    if((NOT "${SCOPE}" STREQUAL "PRIVATE")
+       AND (NOT "${SCOPE}" STREQUAL "PUBLIC")
+       AND (NOT "${SCOPE}" STREQUAL "INTERFACE"))
+      message(FATAL_ERROR "nm_add_compiler_definitions: SCOPE must be one of PRIVATE, PUBLIC or INTERFACE (is: ${SCOPE})")
+    endif()
+    list(APPEND NM_LIB_COMPILER_DEFS_${SCOPE} ${ARGN})
+  endmacro()
+
+  macro(nm_add_tool_compiler_definitions)
+    list(APPEND NM_TOOL_COMPILER_DEFS ${ARGN})
+  endmacro()
+
+  macro(nm_add_compiler_definitions SCOPE)
+    nm_add_lib_compiler_definitions(${SCOPE} ${ARGN})
+    nm_add_tool_compiler_definitions(${ARGN})
+  endmacro()
+
 
   set(NM_COMPILERFLAGS_CMAKE_INCLUDED TRUE)
 endif()
