@@ -105,6 +105,7 @@ including `NiceMake.cmake`:
 | `NM_CONF_OPTION_PREFIX` | Prefix for CMake options defined by NiceMake | `${CMAKE_PROJECT_NAME}` |
 | `NM_CONF_GTEST_REPOSITORY` | The Google Test repository from which to download Google Test | `https://github.com/google/googletest.git` |
 | `NM_CONF_GTEST_TAG` | The Google Test version tag to be fetched | `release-1.8.1` |
+| `NM_CONF_DONT_SET_OUTPUT_DIR` | Don't set the build output directory to `bin/` | `OFF` |
 
 ## Using NiceMake in CMake projects
 
