@@ -34,7 +34,7 @@ if(NOT NM_COMPILERFLAGS_CMAKE_INCLUDED)
   set(NM_LIB_COMPILER_DEFS_PRIVATE)
   set(NM_LIB_COMPILER_DEFS_PUBLIC)
   set(NM_LIB_COMPILER_DEFS_INTERFACE)
-  set(NM_TOOL_COMPILER_DEFS)
+  set(NM_TOOL_COMPILE_DEFS)
 
 
   macro(nm_add_lib_compile_options SCOPE)
@@ -66,7 +66,7 @@ if(NOT NM_COMPILERFLAGS_CMAKE_INCLUDED)
   endmacro()
 
   macro(nm_add_tool_compile_definitions)
-    list(APPEND NM_TOOL_COMPILER_DEFS ${ARGN})
+    list(APPEND NM_TOOL_COMPILE_DEFS ${ARGN})
   endmacro()
 
   macro(nm_add_compile_definitions SCOPE)

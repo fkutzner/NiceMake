@@ -76,7 +76,7 @@ if(NOT NM_TARGETCREATION_CMAKE_INCLUDED)
 
     target_link_libraries(${NAME} ${NM_THIRDPARTY_LIBS})
     target_compile_options(${NAME} PUBLIC ${NM_TOOL_COMPILE_OPTS})
-    target_compile_definitions(${NAME} PUBLIC ${NM_TOOL_COMPILER_DEFS})
+    target_compile_definitions(${NAME} PUBLIC ${NM_TOOL_COMPILE_DEFS})
     target_include_directories(${NAME} PUBLIC ${PROJECT_SOURCE_DIR}/include)
     target_include_directories(${NAME} PUBLIC ${nm_target_include_dir})
   endfunction()

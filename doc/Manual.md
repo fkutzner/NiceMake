@@ -175,7 +175,7 @@ can be added via `nm_add_lib_compile_definitions`,
 > defined in the current directory and its subdirectories.
 >
 > The compiler definitions are collected in the variable
-> `NM_TOOL_COMPILER_DEFS`.
+> `NM_TOOL_COMPILE_DEFS`.
 
 > `nm_add_compile_definitions(<flag1> [<flag2> ...])`
 >
