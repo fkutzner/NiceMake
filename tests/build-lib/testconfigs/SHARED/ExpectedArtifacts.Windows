@@ -1,3 +1,0 @@
-File lib/testlib.testmodule.lib
-File bin/testlib.testmodule.dll
-Executable bin/run.exe 42

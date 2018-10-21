@@ -27,6 +27,50 @@
 
 # This file contains bash functions useful for testing CMake projects.
 
+# Prints the build platform name.
+# The variable CMAKE_GENERATOR must be set to the current CMake generator.
+#
+# Printed output by platform:
+#  macOS (Unix Makefiles): Darwin
+#  Linux (Unix Makefiles): Linux
+#  Cygwin (Unix Makefiles): Cygwin
+#  MSys2 (Visual Studio generator): Windows.VisualStudio
+#  MSys2 (Unix Makefiles): Windows.MSysMake
+#
+# If the build platform does not match any of the above, this function calls
+# exit with error code 1. (TODO: substitute exit with error return value)
+
+function print_build_platform_name {
+  host_os=$(uname)
+  if [[ ${host_os} == CYGWIN* ]]
+  then
+    if [[ "${CMAKE_GENERATOR}" != "Unix Makefiles" ]]
+    then
+      echo "Error: testing on ${host_os} is only supported for the 'Unix Makefiles' generator"
+    fi
+    platform=Cygwin
+  elif [[ "${host_os}" == MSYS* ]]
+  then
+    if [[ "${CMAKE_GENERATOR}" == Visual* ]]
+    then
+      # TODO: assuming that the code is compiled with MSVC, but it might be MinGW
+      platform=Windows.VisualStudio
+    elif [[ "${CMAKE_GENERATOR}" == "Unix Makefiles" ]]
+    then
+      # TODO: assuming that the code is compiled with gcc, but it might be MinGW
+      platform=Windows.MSysMake
+    fi
+  else
+    if [[ "${CMAKE_GENERATOR}" != "Unix Makefiles" ]]
+    then
+      echo "Error: testing on ${host_os} is only supported for the 'Unix Makefiles' generator"
+    fi
+    platform=${host_os}
+  fi
+  
+  echo ${platform}
+}
+
 # Usage: check_build_dir_artifacts EXPECTED_ARTIFACTS_FILE
 #
 # Reads the file EXPECTED_ARTIFACTS_FILE line-by-line, and for each line L
@@ -51,8 +95,11 @@
 # laid out above, or if a check fails, check_build_dir_artifacts exits with exit
 # code 1. Otherwise, check_build_dir_artifacts has no effect beside executing
 # binaries specified in "Executable" lines.
+
 function check_build_dir_artifacts {
   EXPECTED_ARTIFACTS_FILE=$1
+  echo "Checking files according to $1."
+  echo "  Current dir: $(pwd)"
 
   if [ ! -e ${EXPECTED_ARTIFACTS_FILE} ]
   then
@@ -61,11 +108,14 @@ function check_build_dir_artifacts {
   fi
 
   while read -r spec || [[ -n "$spec" ]]; do
+    echo "  Checking test spec: ${spec}"
+    spec=$(echo ${spec} | tr -d '\n')
+    spec=$(echo ${spec} | tr -d '\r')
     if [[ "${spec}" == File* ]]
     then
       # Check that the given file exists
       read cmd filename <<< ${spec}
-      if [ ! -e ${filename} ]
+      if [ ! -e "${filename}" ]
       then
         echo "Missing file ${filename} in build directory"
         exit 1
@@ -74,7 +124,7 @@ function check_build_dir_artifacts {
     then
       # Check that the given executable exists and produces the desired output
       read cmd executable expected_output <<< ${spec}
-      if [ ! -e ${executable} ]
+      if [ ! -e "${executable}" ]
       then
         echo "Missing file ${executable} in build directory"
         exit 1

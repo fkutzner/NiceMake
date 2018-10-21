@@ -5,6 +5,7 @@ set -e
 MODE=$1
 TEST_PROJECT_DIR=$2
 CHECK_RESULTS_LIB=$3
+CMAKE_GENERATOR=$4
 
 echo "Running in $(pwd) with test project dir ${TEST_PROJECT_DIR} and mode ${MODE}"
 
@@ -15,20 +16,12 @@ then
 fi
 
 mkdir build-lib-${MODE} && cd build-lib-${MODE}
-cmake -DLIB_BUILD_MODE=${MODE} ${TEST_PROJECT_DIR}
+cmake -DLIB_BUILD_MODE=${MODE} -G "${CMAKE_GENERATOR}" ${TEST_PROJECT_DIR}
 cmake --build .
 
-host_os=$(uname)
-if [[ ${host_os} == CYGWIN* ]]
-then
-  host_os=Cygwin
-elif [[ ${host_os} == MSYS* ]]
-then
-  host_os=MSys
-fi
-
-EXPECTED_ARTIFACTS_FILE=${TEST_PROJECT_DIR}/../testconfigs/${MODE}/ExpectedArtifacts.${host_os}
-source ${CHECK_RESULTS_LIB}
 
 echo "Checking results..."
+source ${CHECK_RESULTS_LIB}
+platform=$(print_build_platform_name)
+EXPECTED_ARTIFACTS_FILE=${TEST_PROJECT_DIR}/../testconfigs/${MODE}/ExpectedArtifacts.${platform}
 check_build_dir_artifacts ${EXPECTED_ARTIFACTS_FILE}
