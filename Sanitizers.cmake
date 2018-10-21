@@ -52,7 +52,7 @@ if(NOT NM_SANITIZERS_CMAKE_INCLUDED)
 
     if(sanitizer_flags)
       list(APPEND sanitizer_flags "-fno-omit-frame-pointer")
-      nm_add_compile_options(${sanitizer_flags})
+      nm_add_compile_options(PRIVATE ${sanitizer_flags})
 
       string(REPLACE ";" " " SANITIZER_LINKER_FLAGS "${sanitizer_flags}")
       set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${SANITIZER_LINKER_FLAGS}")

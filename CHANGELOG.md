@@ -20,3 +20,6 @@ The format of this file is based on [Keep a Changelog 1.0.0](https://keepachange
   `PUBLIC` or `INTERFACE` as its first argument, controlling the scope as
   with `target_compile_options`.
 - Lowered the required CMake version to 3.6
+
+### Fixed
+- Fixed addition of sanitizer compile-options
