@@ -26,6 +26,7 @@
 # other dealings in this Software without prior written authorization.
 
 if(NOT NM_TARGETCREATION_CMAKE_INCLUDED)
+  include(${CMAKE_CURRENT_LIST_DIR}/detail/TargetProperties.cmake)
 
   set(NM_EMPTY_CPP_FILE ${CMAKE_CURRENT_LIST_DIR}/empty.cpp)
 
@@ -49,40 +50,8 @@ if(NOT NM_TARGETCREATION_CMAKE_INCLUDED)
     set_property(TARGET "${NAME}" PROPERTY FOLDER "Libraries/${FOLDER_NAME}")
     set_property(TARGET "${NAME}" PROPERTY PROJECT_LABEL "Library")
 
-    if(NOT ${simple_kind} STREQUAL "OBJECT")
-      target_link_libraries(${NAME} ${NM_THIRDPARTY_LIBS})
-    else()
-      # Import interface definitions
-      foreach(third_party_lib ${NM_THIRDPARTY_LIBS})
-        get_target_property(interface_includes ${third_party_lib} INTERFACE_INCLUDE_DIRECTORIES)
-        get_target_property(interface_comp_opts ${third_party_lib} INTERFACE_COMPILE_OPTIONS)
-        get_target_property(interface_comp_defs ${third_party_lib} INTERFACE_COMPILE_DEFINITIONS)
-
-        if(interface_includes)
-          target_include_directories(${NAME} PRIVATE ${interface_includes})
-        endif()
-
-        if(interface_comp_opts)
-          target_compile_options(${NAME} PRIVATE ${interface_comp_opts})
-        endif()
-
-        if(interface_comp_defs)
-          target_compile_definitions(${NAME} PRIVATE ${interface_comp_defs})
-        endif()
-      endforeach()
-    endif()
-
-    # When building Linux shared objects with OBJECT libraries, -fPIC needs
-    # to be passed to the compiler explicitly:
-    if(${KIND} STREQUAL "OBJECT-SHARED"
-       AND NM_COMPILING_WITH_GNULIKE AND NM_PLATFORM_REQUIRES_EXTRA_PIC_FOR_DSO)
-      target_compile_options(${NAME} PRIVATE -fPIC)
-    endif()
-
-    foreach(scope IN ITEMS PUBLIC PRIVATE INTERFACE)
-      target_compile_options(${NAME} ${scope} ${NM_LIB_COMPILE_OPTS_${scope}})
-      target_compile_definitions(${NAME} ${scope} ${NM_LIB_COMPILER_DEFS_${scope}})
-    endforeach()
+    nm_detail_link_thirdpartylibs_to_lib(${NAME} ${simple_kind})
+    nm_detail_add_compile_options_to_lib(${NAME} ${KIND})
 
     target_include_directories(${NAME} PUBLIC ${PROJECT_SOURCE_DIR}/include)
   endfunction()
