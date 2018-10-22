@@ -378,9 +378,9 @@ NiceMake has a function for downloading [Google Test](https://github.com/google/
 >
 > Downloads Google Test from ${NM_CONF_GTEST_REPOSITORY}
 > at tag ${NM_CONF_GTEST_TAG} (see [Configuring
-> NiceMake](#configuring-nicemake)) at configure time
-> and adds its source directory via `add_subdirectory`.
-> Google Test is compiled used the compiler flags set up
+> NiceMake](#configuring-nicemake))
+> and adds its source directory via `add_subdirectory()`.
+> Google Test is compiled using the compiler flags set up
 > via `nm_add_tool_compile_options()`.
 >
 > After executing this function, the targets `gtest` and
