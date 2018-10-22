@@ -1,0 +1,37 @@
+image: Visual Studio 2017
+
+init:
+  - git config --global core.autocrlf input
+
+clone_folder: C:\projects\repos\nicemake
+
+platform:
+  - x64
+
+environment:
+  matrix:
+    - TARGET_GENERATOR: "MSBuild"
+    - TARGET_GENERATOR: "CygwinMake"
+
+configuration:
+  - Debug
+
+# This is a workaround: AppVeyor tries to directly invoke MSBuild unless
+# "build: false" is set, which causes the build script to be ignored.
+install:
+  # With MSBuild:
+  - ps: if($env:TARGET_GENERATOR -eq 'MSBuild') {
+          C:\msys64\usr\bin\env MSYSTEM=MINGW64 C:\msys64\usr\bin\bash.exe -l -c "cd C:/projects/repos && mkdir nicemake-test && cd nicemake-test && cmake -G 'Visual Studio 15 2017' ../nicemake/tests && ctest -C Debug --output-on-failure";
+        }
+
+  # With Cygwin:
+  - ps: if($env:TARGET_GENERATOR -eq 'CygwinMake') {
+          C:\cygwin64\bin\bash.exe -l -c "cd /cygdrive/c/projects/repos && mkdir nicemake-test && cd nicemake-test && cmake -G 'Unix Makefiles' ../nicemake/tests && ctest --output-on-failure";
+        }
+
+build: false
+
+test: off
+
+# MSys root: C:\msys64
+# Cygwin root: C:\cygwin64
