@@ -1,0 +1,17 @@
+language: cpp
+compiler:
+  - gcc
+  - clang
+
+os:
+  - linux
+  - osx
+
+dist: trusty
+sudo: required
+
+script:
+  - mkdir -p ../run-tests
+  - cd ../run-tests
+  - cmake $TRAVIS_BUILD_DIR/tests
+  - ctest
