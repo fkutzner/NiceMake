@@ -100,13 +100,13 @@ tools/
 To configure NiceMake, set the following variables before
 including `NiceMake.cmake`:
 
-| Variable | Description | Default value |
-|----------------------------------------|
-| `NM_CONF_OPTION_PREFIX` | Prefix for CMake options defined by NiceMake | `${CMAKE_PROJECT_NAME}` |
-| `NM_CONF_GTEST_REPOSITORY` | The Google Test repository from which to download Google Test | `https://github.com/google/googletest.git` |
-| `NM_CONF_GTEST_TAG` | The Google Test version tag to be fetched | `release-1.8.1` |
-| `NM_CONF_DONT_SET_OUTPUT_DIR` | Don't set the build output directory to `bin/` | `FALSE` |
-| `NM_CONF_DONT_DEFINE_SANITIZER_OPTIONS` | Don't add the sanitizer options to the public CMake options | `FALSE` |
+| Variable                                 | Description                                                   | Default value                              |
+|------------------------------------------|---------------------------------------------------------------|--------------------------------------------|
+| `NM_CONF_OPTION_PREFIX`                  | Prefix for CMake options defined by NiceMake                  | `${CMAKE_PROJECT_NAME}`                    |
+| `NM_CONF_GTEST_REPOSITORY`               | The Google Test repository from which to download Google Test | `https://github.com/google/googletest.git` |
+| `NM_CONF_GTEST_TAG`                      | The Google Test version tag to be fetched                     | `release-1.8.1`                            |
+| `NM_CONF_DONT_SET_OUTPUT_DIR`            | Don't set the build output directory to `bin/`                | `FALSE`                                    |
+| `NM_CONF_DONT_DEFINE_SANITIZER_OPTIONS`  | Don't add the sanitizer options to the public CMake options   | `FALSE`                                    |
 
 ## Using NiceMake in CMake projects
 
@@ -376,8 +376,9 @@ NiceMake has a function for downloading [Google Test](https://github.com/google/
 
 > `nm_add_gtest()`
 >
-> Downloads Google Test from ${NM_CONF_GTEST_REPOSITORY}
-> at tag ${NM_CONF_GTEST_TAG} (see [Configuring
+> Downloads [Google Test](https://github.com/google/googletest)
+> from `${NM_CONF_GTEST_REPOSITORY}`
+> at tag `${NM_CONF_GTEST_TAG}` (see [Configuring
 > NiceMake](#configuring-nicemake))
 > and adds its source directory via `add_subdirectory()`.
 > Google Test is compiled using the compiler flags set up
