@@ -8,7 +8,7 @@ The format of this file is based on [Keep a Changelog 1.0.0](https://keepachange
   adding it to the build
 - `nm_add_header_only_library`, a function for defining header-only library
   targets
-- Testing on Cygwin
+- Testing on Cygwin and Windows
 - Added `nm_add_compile_definitions` and `nm_add_tool_compile_definitions`
 - Add option for suppressing sanitizer CMake option exports
 

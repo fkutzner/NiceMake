@@ -27,6 +27,7 @@
 
 # This file contains bash functions useful for testing CMake projects.
 
+#
 # Prints the build platform name.
 # The variable CMAKE_GENERATOR must be set to the current CMake generator.
 #
@@ -34,12 +35,12 @@
 #  macOS (Unix Makefiles): Darwin
 #  Linux (Unix Makefiles): Linux
 #  Cygwin (Unix Makefiles): Cygwin
-#  MSys2 (Visual Studio generator): Windows.VisualStudio
-#  MSys2 (Unix Makefiles): Windows.MSysMake
+#  MSys2 / Git Bash (Visual Studio generator): Windows.VisualStudio
+#  MSys2 / Git Bash (Unix Makefiles): Windows.MSysMake
 #
-# If the build platform does not match any of the above, this function calls
-# exit with error code 1. (TODO: substitute exit with error return value)
-
+# If the build platform does not match any of the above, this function prints
+# an error and returns with code 1.
+#
 function print_build_platform_name {
   host_os=$(uname)
   if [[ ${host_os} == CYGWIN* ]]
@@ -47,9 +48,10 @@ function print_build_platform_name {
     if [[ "${CMAKE_GENERATOR}" != "Unix Makefiles" ]]
     then
       echo "Error: testing on ${host_os} is only supported for the 'Unix Makefiles' generator"
+      return 1
     fi
     platform=Cygwin
-  elif [[ "${host_os}" == MSYS* ]]
+  elif [[ "${host_os}" == MSYS* ]] || [[ "${host_os}" == MINGW* ]]
   then
     if [[ "${CMAKE_GENERATOR}" == Visual* ]]
     then
@@ -59,18 +61,24 @@ function print_build_platform_name {
     then
       # TODO: assuming that the code is compiled with gcc, but it might be MinGW
       platform=Windows.MSysMake
+    else
+      echo "Error: testing on ${host_os} with generator ${CMAKE_GENERATOR} is not supported yet"
+      return 1
     fi
   else
     if [[ "${CMAKE_GENERATOR}" != "Unix Makefiles" ]]
     then
       echo "Error: testing on ${host_os} is only supported for the 'Unix Makefiles' generator"
+      return 1
     fi
     platform=${host_os}
   fi
   
   echo ${platform}
+  return 0
 }
 
+#
 # Usage: check_build_dir_artifacts EXPECTED_ARTIFACTS_FILE
 #
 # Reads the file EXPECTED_ARTIFACTS_FILE line-by-line, and for each line L
@@ -95,7 +103,7 @@ function print_build_platform_name {
 # laid out above, or if a check fails, check_build_dir_artifacts exits with exit
 # code 1. Otherwise, check_build_dir_artifacts has no effect beside executing
 # binaries specified in "Executable" lines.
-
+#
 function check_build_dir_artifacts {
   EXPECTED_ARTIFACTS_FILE=$1
   echo "Checking files according to $1."
