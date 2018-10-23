@@ -1,5 +1,5 @@
 #include <iostream>
-#include <cstdio>
+#include <cstdlib>
 
 #include <testsharedlib/Shared.h>
 #include <testsharedlib/objsharedlib/ObjShared.h>

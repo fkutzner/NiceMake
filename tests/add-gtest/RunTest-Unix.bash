@@ -22,5 +22,5 @@ if [[ "${CMAKE_GENERATOR}" == Visual* ]]
 then
   bin/Debug/testbin.exe
 else
-  bin/testbin.exe
+  bin/testbin
 fi
