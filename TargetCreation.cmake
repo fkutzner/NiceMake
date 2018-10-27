@@ -26,6 +26,7 @@
 # other dealings in this Software without prior written authorization.
 
 if(NOT NM_TARGETCREATION_CMAKE_INCLUDED)
+  include(${CMAKE_CURRENT_LIST_DIR}/NiceMakeConfig.cmake)
   include(${CMAKE_CURRENT_LIST_DIR}/detail/TargetProperties.cmake)
 
   set(NM_EMPTY_CPP_FILE ${CMAKE_CURRENT_LIST_DIR}/empty.cpp)
@@ -37,7 +38,7 @@ if(NOT NM_TARGETCREATION_CMAKE_INCLUDED)
   function(nm_add_library NAME KIND)
     string(REPLACE "." "/" FOLDER_NAME ${NAME})
 
-    set(nm_target_include_dir "${PROJECT_SOURCE_DIR}/include/${FOLDER_NAME}")
+    set(nm_target_include_dir "${PROJECT_SOURCE_DIR}/${NM_CONF_INCLUDE_DIR}/${FOLDER_NAME}")
     file(GLOB LIBRARY_HEADERS "${nm_target_include_dir}/*.h")
 
     if(${KIND} STREQUAL "OBJECT-STATIC" OR ${KIND} STREQUAL "OBJECT-SHARED")
@@ -53,7 +54,7 @@ if(NOT NM_TARGETCREATION_CMAKE_INCLUDED)
     nm_detail_link_thirdpartylibs_to_lib(${NAME} ${simple_kind})
     nm_detail_add_compile_options_to_lib(${NAME} ${KIND})
 
-    target_include_directories(${NAME} PUBLIC ${PROJECT_SOURCE_DIR}/include)
+    target_include_directories(${NAME} PUBLIC ${PROJECT_SOURCE_DIR}/${NM_CONF_INCLUDE_DIR})
   endfunction()
 
   function(nm_add_dummy_library NAME)
@@ -67,7 +68,7 @@ if(NOT NM_TARGETCREATION_CMAKE_INCLUDED)
   function(nm_add_tool NAME)
     string(REPLACE "." "/" FOLDER_NAME ${NAME})
 
-    set(nm_target_include_dir "${PROJECT_SOURCE_DIR}/tools/${FOLDER_NAME}")
+    set(nm_target_include_dir "${PROJECT_SOURCE_DIR}/${NM_CONF_TOOLS_DIR}/${FOLDER_NAME}")
     file(GLOB ${TOOL_HEADERS} "${nm_target_include_dir}/*.h")
 
     add_executable(${NAME} ${TOOL_HEADERS} ${ARGN})
@@ -77,7 +78,7 @@ if(NOT NM_TARGETCREATION_CMAKE_INCLUDED)
     target_link_libraries(${NAME} PRIVATE ${NM_THIRDPARTY_LIBS})
     target_compile_options(${NAME} PRIVATE ${NM_TOOL_COMPILE_OPTS})
     target_compile_definitions(${NAME} PRIVATE ${NM_TOOL_COMPILE_DEFS})
-    target_include_directories(${NAME} PRIVATE ${PROJECT_SOURCE_DIR}/include)
+    target_include_directories(${NAME} PRIVATE ${PROJECT_SOURCE_DIR}/${NM_CONF_INCLUDE_DIR})
     target_include_directories(${NAME} PRIVATE ${nm_target_include_dir})
   endfunction()
 

@@ -25,24 +25,19 @@
 # shall not be used in advertising or otherwise to promote the sale, use or
 # other dealings in this Software without prior written authorization.
 
-if(NOT NM_NICEMAKE_CMAKE_INCLUDED)
-  cmake_minimum_required(VERSION 3.6 FATAL_ERROR)
+if(NOT NM_NICEMAKECONFIG_CMAKE_INCLUDED)
 
-  include(${CMAKE_CURRENT_LIST_DIR}/NiceMakeConfig.cmake)
-  include(${CMAKE_CURRENT_LIST_DIR}/Platform.cmake)
-  include(${CMAKE_CURRENT_LIST_DIR}/CompilerFlags.cmake)
-  include(${CMAKE_CURRENT_LIST_DIR}/Sanitizers.cmake)
-  include(${CMAKE_CURRENT_LIST_DIR}/Options.cmake)
-  include(${CMAKE_CURRENT_LIST_DIR}/TargetCreation.cmake)
-  include(${CMAKE_CURRENT_LIST_DIR}/ThirdPartyLibs.cmake)
-  include(${CMAKE_CURRENT_LIST_DIR}/GTest.cmake)
-
-  if (NOT NM_CONF_DONT_SET_OUTPUT_DIR)
-    set(NM_CONF_DONT_SET_OUTPUT_DIR FALSE)
-    set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
-    set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
-    set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+  if (NOT NM_CONF_INCLUDE_DIR)
+    set(NM_CONF_INCLUDE_DIR "include")
   endif()
 
-  set(NM_NICEMAKE_CMAKE_INCLUDED TRUE)
+  if (NOT NM_CONF_LIB_DIR)
+    set(NM_CONF_LIB_DIR "lib")
+  endif()
+
+  if (NOT NM_CONF_TOOLS_DIR)
+    set(NM_CONF_LIB_DIR "tools")
+  endif()
+
+  set(NM_NICEMAKECONFIG_CMAKE_INCLUDED TRUE)
 endif()

@@ -34,7 +34,9 @@ project](https://github.com/llvm-mirror/llvm): the project
 defines a set of libraries within the toplevel directory
 `lib`, with the corresponding public header files being
 contained in the toplevel directory `include`. Executables
-are defined in the toplevel directory `tools`.
+are defined in the toplevel directory `tools`. (*Note*:
+the names of these directories can be changed, see
+[Configuring NiceMake](#configuring-nicemake))
 
 Each library `<L>` is defined in the directory `lib/<L>`
 and may be organized in _modules_ `<m1>, ..., <mN>`
@@ -107,6 +109,10 @@ including `NiceMake.cmake`:
 | `NM_CONF_GTEST_TAG`                      | The Google Test version tag to be fetched                     | `release-1.8.1`                            |
 | `NM_CONF_DONT_SET_OUTPUT_DIR`            | Don't set the build output directory to `bin/`                | `FALSE`                                    |
 | `NM_CONF_DONT_DEFINE_SANITIZER_OPTIONS`  | Don't add the sanitizer options to the public CMake options   | `FALSE`                                    |
+| `NM_CONF_INCLUDE_DIR`                    | Path to the public header directory, relative to the project's root directory | `include`                  |
+| `NM_CONF_LIB_DIR`                        | Path to the library implementation directory, relative to the project's root directory | `lib`             |
+| `NM_CONF_TOOLS_DIR`                      | Path to the tool implementation directory, relative to the project's root directory | `tools`              |
+
 
 ## Using NiceMake in CMake projects
 
@@ -218,11 +224,11 @@ third-party libraries:
 > Let `<path>` be the
 > result of substituting all dot characters in `<name>`
 > by path separators.
-> All header files contained in `include/<path>` are added
+> All header files contained in `${NM_CONF_INCLUDE_DIR}/<path>` are added
 > to the target as source files. The created target is added
 > to the CMake folder `Libraries/<path>`.
 >
-> The toplevel directory `include` is added to the
+> The toplevel directory `${NM_CONF_INCLUDE_DIR}` is added to the
 > created target's include directories.
 
 Following the project layout, invoke
@@ -267,7 +273,7 @@ Add executable binaries using `nm_add_tool`:
 > to the target as source files. The created target is added
 > to the CMake folder `Tools/<path>`.
 >
-> The toplevel directory `include` is added to the
+> The toplevel directory `${NM_CONF_INCLUDE_DIR}` is added to the
 > created target's include directories.
 
 Following the project layout, invoke
