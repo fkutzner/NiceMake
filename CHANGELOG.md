@@ -25,3 +25,5 @@ The format of this file is based on [Keep a Changelog 1.0.0](https://keepachange
 
 ### Fixed
 - Fixed addition of sanitizer compile-options
+- Fixed C++ header file globbing by also adding `*.hpp`,
+  `*.hxx`, `*.hh` and `*.H` files

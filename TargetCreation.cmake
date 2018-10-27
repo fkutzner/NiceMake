@@ -39,7 +39,11 @@ if(NOT NM_TARGETCREATION_CMAKE_INCLUDED)
     string(REPLACE "." "/" FOLDER_NAME ${NAME})
 
     set(nm_target_include_dir "${PROJECT_SOURCE_DIR}/${NM_CONF_INCLUDE_DIR}/${FOLDER_NAME}")
-    file(GLOB LIBRARY_HEADERS "${nm_target_include_dir}/*.h")
+    file(GLOB LIBRARY_HEADERS "${nm_target_include_dir}/*.h"
+                              "${nm_target_include_dir}/*.hh"
+                              "${nm_target_include_dir}/*.hpp"
+                              "${nm_target_include_dir}/*.hxx"
+                              "${nm_target_include_dir}/*.H")
 
     if(${KIND} STREQUAL "OBJECT-STATIC" OR ${KIND} STREQUAL "OBJECT-SHARED")
       set(simple_kind "OBJECT")
