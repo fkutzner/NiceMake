@@ -83,6 +83,8 @@ if(NOT NM_TARGETPROPERTIES_CMAKE_INCLUDED)
     # to be passed to the compiler explicitly:
     if(${KIND} STREQUAL "OBJECT-SHARED"
        AND NM_COMPILING_WITH_GNULIKE AND NM_PLATFORM_REQUIRES_EXTRA_PIC_FOR_DSO)
+      # Alternatively, the POSITION_INDEPENDENT_CODE property could be set here
+      # TODO: check reliability of POSITION_INDEPENDENT_CODE handling
       target_compile_options(${TARGET} PRIVATE -fPIC)
     endif()
 
