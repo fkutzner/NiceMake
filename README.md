@@ -1,6 +1,9 @@
 # NiceMake 0.1.0
 A collection of commonly useful CMake functions for C and C++ projects
 
+Linux/macOS tests: [![Build Status](https://travis-ci.org/fkutzner/NiceMake.svg?branch=master)](https://travis-ci.org/fkutzner/NiceMake)<br/>
+Windows/Cygwin tests: [![Build status](https://ci.appveyor.com/api/projects/status/57vt3w5vkhoyhn31?svg=true)](https://ci.appveyor.com/project/fkutzner/nicemake)
+
 ## Introduction
 
 NiceMake is a collection of CMake scripts for quickly setting up C and C++
