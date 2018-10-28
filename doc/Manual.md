@@ -2,16 +2,16 @@
 
 Table of contents:
 
-* [1. Supported platforms](#supported-platforms)
-* [2. Project layout](#project-layout)
-* [3. Configuring NiceMake](#configuring-nicemake)
-* [4. Using NiceMake in CMake projects](#using-nicemake-in-cmake-projects)
-* [5. Setting compiler options](#setting-compiler-options)
-* [6. Defining libraries and tools](#defining-libraries-and-tools)
-* [7. Compiler and platform detection helpers](#compiler-and-platform-detection-helpers)
-* [8. Using third-party libraries](#using-third-party-libraries)
-* [9. Sanitizers](#sanitizers)
-* [10. Adding Google Test to your project](#adding-google-test-to-your-project)
+1. [Supported platforms](#supported-platforms)
+2. [Project layout](#project-layout)
+3. [Configuring NiceMake](#configuring-nicemake)
+4. [Using NiceMake in CMake projects](#using-nicemake-in-cmake-projects)
+5. [Setting compiler options](#setting-compiler-options)
+6. [Defining libraries and tools](#defining-libraries-and-tools)
+7. [Compiler and platform detection helpers](#compiler-and-platform-detection-helpers)
+8. [Using third-party libraries](#using-third-party-libraries)
+9. [Sanitizers](#sanitizers)
+10. [Adding Google Test to your project](#adding-google-test-to-your-project)
 
 ## Supported platforms
 
