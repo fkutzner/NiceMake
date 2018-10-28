@@ -14,6 +14,7 @@ projects, providing generic functionality such as (so far):
 * third-party library handling
 * a thin wrapper for `add_library` which adds compiler flags,
   include directories and third-party library dependencies
+* configure-time download of [Google Test](https://github.com/google/googletest)
 
 NiceMake uses the convention-over-configuration approach, using default project
 layout conventions close to those used by the [LLVM

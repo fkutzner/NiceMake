@@ -1,4 +1,4 @@
-# NiceMake Manual
+# NiceMake 0.1.0 Manual
 
 Table of contents:
 
@@ -97,6 +97,9 @@ tools/
     ...
 ```
 
+Due to the high variance in requirements for test setups, this
+structure has no fixed arrangements for tests.
+
 ## Configuring NiceMake
 
 To configure NiceMake, set the following variables before
@@ -121,7 +124,7 @@ To use NiceMake in your CMake project, include the file
 
 ## Setting compiler options
 
-Compiler options can be separately defined for
+Baseline compiler options can be separately defined for
 tools and libraries using the functions
 `nm_add_lib_compile_options`, `nm_add_tool_compile_options`
 and `nm_add_compile_options`:
@@ -198,7 +201,7 @@ functions, automatically adding public header files,
 compiler options, include directories and links to
 third-party libraries:
 
-> `nm_add_library(<name> [STATIC | SHARED | MODULE | OBJECT |  OBJECT-SHARED] <source1> [<source2> ...])`
+> `nm_add_library(<name> <STATIC | SHARED | MODULE | OBJECT |  OBJECT-SHARED> <source1> [<source2> ...])`
 >
 > Defines a library target `<name>` with the source
 > files `<source1> [<source2> ...]` using CMake's
@@ -245,7 +248,8 @@ source file:
 
 
 Note: `nm_add_library` automatically adds the include files contained in the
-directory within `include` corresponding to `<name>`. Thus, usually, invoking
+directory within `${NM_CONF_INCLUDE_DIR}` (default: `include/`) corresponding
+to `<name>`. Thus, usually, invoking
 `nm_add_library(somename somekind)` will suffice to create a header-only
 library target. Even if you don't link the target to anything, this creates
 a target exporting interface definitions. Plus, the header-only library
@@ -378,7 +382,8 @@ executing `set(${NM_OPT_PREFIX}_ENABLE_ASAN TRUE)` before including
 
 ## Adding Google Test to your project
 
-NiceMake has a function for downloading [Google Test](https://github.com/google/googletest) and adding it to your project:
+NiceMake has a function for downloading [Google Test](https://github.com/google/googletest) and adding
+it to your project:
 
 > `nm_add_gtest()`
 >
