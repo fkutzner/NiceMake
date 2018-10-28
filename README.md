@@ -4,6 +4,16 @@ A collection of commonly useful CMake functions for C and C++ projects
 Linux/macOS tests: [![Build Status](https://travis-ci.org/fkutzner/NiceMake.svg?branch=master)](https://travis-ci.org/fkutzner/NiceMake)<br/>
 Windows/Cygwin tests: [![Build status](https://ci.appveyor.com/api/projects/status/57vt3w5vkhoyhn31?svg=true)](https://ci.appveyor.com/project/fkutzner/nicemake)
 
+Table of contents:
+
+1. [Introduction](#introduction)
+2. [Scope](#scope)
+3. [Documentation](#documentation)
+4. [Requirements](#requirements)
+5. [Getting started](#getting-started)
+6. [Versions](#versions)
+7. [Branches and tags](#branches-and-tags)
+
 ## Introduction
 
 NiceMake is a collection of CMake scripts for quickly setting up C and C++
@@ -62,3 +72,12 @@ as NiceMake has reached version 1.0.0,
   compatibility.
 * breaking changes (e.g. increasing the required CMake version) may be
   introduced with major-version updates, e.g. with version 2.0.0.
+
+## Branches and tags
+
+| Branch/tag              | Type   | Purpose                        |
+|-------------------------|--------|--------------------------------|
+| `current`               | branch | Development branch             |
+| `master`                | branch | Stable branch                  |
+| `rel-A.B.x-patches`     | branch | Patch branch for release A.B.* |
+| `rel-A.B.C`             | tag    | Tag pointing to release A.B.C  |
