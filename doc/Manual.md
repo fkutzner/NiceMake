@@ -12,6 +12,7 @@ Table of contents:
 8. [Using third-party libraries](#using-third-party-libraries)
 9. [Sanitizers](#sanitizers)
 10. [Adding Google Test to your project](#adding-google-test-to-your-project)
+11. [Configuring Doxygen for your project](#configuring-doxygen-for-your-project)
 
 ## Supported platforms
 
@@ -398,3 +399,35 @@ it to your project:
 > After executing this function, the targets `gtest` and
 > `gtest_main` are available, exporting their include
 > directories in their interface.
+
+## Configuring Doxygen for your project
+
+NiceMake offers a function for setting up a target
+building your project's Doxygen documentation. If a simple
+[default Doxygen configuration](../DoxygenGenericCfg.in) is
+suitable for your project and you
+want to build the documentation in the directory
+`${CMAKE_BINARY_DIR}/doc`, it is sufficient to just call
+`nm_add_doxygen()`. Of course, you can use a custom configuration
+file and a different build directory:
+
+> `nm_add_doxygen([CONFIG_FILE <cfg>] [DOCS_BUILD_DIR <dir>])`
+>
+> Tries to find Doxygen via `find_package(Doxygen)`, and,
+> if Doxygen could be found, sets up a target `doxygen`
+> building the project's Doxygen documentation. The target
+> `doxygen` is not added to any other target's
+> dependencies.
+>
+> If `CONFIG_FILE <cfg>` is not specified, a [default Doxygen
+> configuration](../DoxygenGenericCfg.in) is provided by
+> NiceMake. Otherwise, the file `<cfg>` is used as the Doxygen
+> configuration file. Before being passed to Doxygen, the
+> Doxygen configuration file is configured using CMake's
+> [configure_file](https://cmake.org/cmake/help/v3.6/command/configure_file.html)
+> command.
+>
+> If `DOCS_BUILD_DIR <dir>` is not specified, the documentation
+> is built in the directory `${CMAKE_BINARY_DIR}/doc`, i.e. the
+> path to the top level of the build tree. Otherwise, it is built
+> in the directory `<dir>`.

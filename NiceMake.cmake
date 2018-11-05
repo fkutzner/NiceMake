@@ -36,6 +36,7 @@ if(NOT NM_NICEMAKE_CMAKE_INCLUDED)
   include(${CMAKE_CURRENT_LIST_DIR}/TargetCreation.cmake)
   include(${CMAKE_CURRENT_LIST_DIR}/ThirdPartyLibs.cmake)
   include(${CMAKE_CURRENT_LIST_DIR}/GTest.cmake)
+  include(${CMAKE_CURRENT_LIST_DIR}/Doxygen.cmake)
 
   if (NOT NM_CONF_DONT_SET_OUTPUT_DIR)
     set(NM_CONF_DONT_SET_OUTPUT_DIR FALSE)

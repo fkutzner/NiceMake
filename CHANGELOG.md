@@ -2,7 +2,11 @@
 
 The format of this file is based on [Keep a Changelog 1.0.0](https://keepachangelog.com/en/1.0.0/).
 
-## [unreleased]
+## [Unreleased]
+### Added
+- `nm_add_doxygen`, a function for setting up a target for running Doxygen, optionally providing a simple default Doxygen configuration
+
+## [0.2.0] - 2018-10-28
 ### Added
 - `nm_add_gtest`, a function downloading Google Test and
   adding it to the build
