@@ -43,7 +43,7 @@ if(NOT NM_NICEMAKECONFIG_CMAKE_INCLUDED)
   endif()
 
   if (NOT NM_CONF_TOOLS_DIR)
-    set(NM_CONF_LIB_DIR "tools")
+    set(NM_CONF_TOOLS_DIR "tools")
   endif()
 
   set(NM_NICEMAKECONFIG_CMAKE_INCLUDED TRUE)

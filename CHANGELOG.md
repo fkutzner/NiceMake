@@ -6,6 +6,9 @@ The format of this file is based on [Keep a Changelog 1.0.0](https://keepachange
 ### Added
 - `nm_add_doxygen`, a function for setting up a target for running Doxygen, optionally providing a simple default Doxygen configuration
 
+### Fixed
+- Fixed default setting of `NM_CONF_TOOLS_DIR`
+
 ## [0.2.0] - 2018-10-28
 ### Added
 - `nm_add_gtest`, a function downloading Google Test and
