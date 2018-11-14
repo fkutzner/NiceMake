@@ -5,6 +5,8 @@ The format of this file is based on [Keep a Changelog 1.0.0](https://keepachange
 ## [Unreleased]
 ### Added
 - `nm_add_doxygen`, a function for setting up a target for running Doxygen, optionally providing a simple default Doxygen configuration
+- Experimental: `nm_collect_objs_from_subdirectories`, a
+function for collecting objects of object libraries
 
 ### Fixed
 - Fixed default setting of `NM_CONF_TOOLS_DIR`
