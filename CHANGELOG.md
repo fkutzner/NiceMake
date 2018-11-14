@@ -8,6 +8,13 @@ The format of this file is based on [Keep a Changelog 1.0.0](https://keepachange
 - Experimental: `nm_collect_objs_from_subdirectories`, a
 function for collecting objects of object libraries
 
+### Changed
+- The object library setup performed by `nm_add_library` now skips (and warns
+  about) third-party-library targets whose exports contains
+  `BUILD_INTERFACE` or `INSTALL_INTERFACE` generator expressions, since handling
+  of `BUILD_INTERFACE` and `INSTALL_INTERFACE` generator expressions in this
+  situation is a future feature.
+
 ### Fixed
 - Fixed default setting of `NM_CONF_TOOLS_DIR`
 

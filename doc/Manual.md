@@ -223,7 +223,13 @@ third-party libraries:
 >
 > If the created target is not an `OBJECT` or `OBJECT-SHARED`
 > library, all third-party libraries previously registered via
-> `nm_add_thirdparty_libs()` are linked to the target.
+> `nm_add_thirdparty_libs()` are linked to the target. If the
+> created target is an `OBJECT` or `OBJECT-SHARED` library,
+> the include directories, compiler options and definitions
+> of the third-party libraries are added to the created target
+> for all third-party libraries whose exports
+> do not contain `BUILD_INTERFACE` or `INSTALL_INTERFACE`
+> generator expressions.
 >
 > Let `<path>` be the
 > result of substituting all dot characters in `<name>`

@@ -28,6 +28,22 @@
 if(NOT NM_TARGETPROPERTIES_CMAKE_INCLUDED)
 
   #
+  # nm_detail_check_for_interface_generator_expr(<str> <out_var>)
+  #
+  # If `<str>` contains a BUILD_INTERFACE or INSTALL_INTERFACE generator
+  # expression, the variable `<out_var>` is set to `TRUE`. Otherwise, the
+  # variable `<out_var>` is set to `FALSE`.
+  #
+  function(nm_detail_check_for_interface_generator_expr STR OUT_VAR)
+    if(("${STR}" MATCHES "\\\$\\<BUILD_INTERFACE:.*\\>")
+       OR ("${STR}" MATCHES "\\\$\\<INSTALL_INTERFACE.*\\>"))
+      set(${OUT_VAR} TRUE PARENT_SCOPE)
+    else()
+      set(${OUT_VAR} FALSE PARENT_SCOPE)
+    endif()
+  endfunction()
+
+  #
   # nm_detail_link_thirdpartylibs_to_lib(<target> <kind>)
   #
   # Links the third-party libraries registered in NM_THIRDPARTY_LIBS to the
@@ -50,16 +66,25 @@ if(NOT NM_TARGETPROPERTIES_CMAKE_INCLUDED)
         get_target_property(interface_comp_opts ${third_party_lib} INTERFACE_COMPILE_OPTIONS)
         get_target_property(interface_comp_defs ${third_party_lib} INTERFACE_COMPILE_DEFINITIONS)
 
-        if(interface_includes)
-          target_include_directories(${TARGET} PRIVATE ${interface_includes})
-        endif()
+        # BUILD_INTERFACE and INSTALL_INTERFACE generator are not handled yet
+        # here.
+        nm_detail_check_for_interface_generator_expr("${interface_includes}" INC_INV)
+        nm_detail_check_for_interface_generator_expr("${interface_comp_opts}" OPT_INV)
+        nm_detail_check_for_interface_generator_expr("${interface_comp_defs}" DEF_INV)
+        if(INC_INV OR OPT_INV OR DEF_INV)
+          message(WARNING "Skipped adding the exports of ${third_party_lib} to ${TARGET} since they contain BUILD_INTERFACE or INSTALL_INTERFACE generator expressions")
+        else()
+          if(interface_includes)
+            target_include_directories(${TARGET} PRIVATE ${interface_includes})
+          endif()
 
-        if(interface_comp_opts)
-          target_compile_options(${TARGET} PRIVATE ${interface_comp_opts})
-        endif()
+          if(interface_comp_opts)
+            target_compile_options(${TARGET} PRIVATE ${interface_comp_opts})
+          endif()
 
-        if(interface_comp_defs)
-          target_compile_definitions(${TARGET} PRIVATE ${interface_comp_defs})
+          if(interface_comp_defs)
+            target_compile_definitions(${TARGET} PRIVATE ${interface_comp_defs})
+          endif()
         endif()
       endforeach()
     endif()
