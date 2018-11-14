@@ -1,4 +1,4 @@
-# NiceMake 0.2.0 Manual
+# NiceMake 0.3.0 Manual
 
 Table of contents:
 

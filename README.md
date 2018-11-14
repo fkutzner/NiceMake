@@ -1,4 +1,4 @@
-# NiceMake 0.2.0
+# NiceMake 0.3.0 (development version)
 A collection of commonly useful CMake functions for C and C++ projects
 
 Linux/macOS tests: [![Build Status](https://travis-ci.org/fkutzner/NiceMake.svg?branch=master)](https://travis-ci.org/fkutzner/NiceMake)<br/>
@@ -51,7 +51,7 @@ a [Changelog](CHANGELOG.md).
 
 ## Requirements
 
-NiceMake 0.2.0 requires CMake version 3.6.
+NiceMake 0.3.0 requires CMake version 3.6.
 
 ## Getting started
 
