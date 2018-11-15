@@ -9,11 +9,8 @@ The format of this file is based on [Keep a Changelog 1.0.0](https://keepachange
 function for collecting objects of object libraries
 
 ### Changed
-- The object library setup performed by `nm_add_library` now skips (and warns
-  about) third-party-library targets whose exports contains
-  `BUILD_INTERFACE` or `INSTALL_INTERFACE` generator expressions, since handling
-  of `BUILD_INTERFACE` and `INSTALL_INTERFACE` generator expressions in this
-  situation is a future feature.
+- Third-party libraries are now regularly linked to object libraries defined
+  using `nm_add_library`.
 
 ### Fixed
 - Fixed default setting of `NM_CONF_TOOLS_DIR`

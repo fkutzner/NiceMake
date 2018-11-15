@@ -55,7 +55,7 @@ if(NOT NM_TARGETCREATION_CMAKE_INCLUDED)
     set_property(TARGET "${NAME}" PROPERTY FOLDER "Libraries/${FOLDER_NAME}")
     set_property(TARGET "${NAME}" PROPERTY PROJECT_LABEL "Library")
 
-    nm_detail_link_thirdpartylibs_to_lib(${NAME} ${simple_kind})
+    target_link_libraries(${NAME} ${NM_THIRDPARTY_LIBS})
     nm_detail_add_compile_options_to_lib(${NAME} ${KIND})
 
     target_include_directories(${NAME} PUBLIC ${PROJECT_SOURCE_DIR}/${NM_CONF_INCLUDE_DIR})
