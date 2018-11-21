@@ -4,11 +4,13 @@ The format of this file is based on [Keep a Changelog 1.0.0](https://keepachange
 
 ## [Unreleased]
 ### Added
+- `nm_enforce_lang_standard_adherence`, a function for setting compiler flags
+for strict language standard adherence
+- `nm_enable_release_assertions`, a function for enabling assertions in release
+mode by removing the `NDEBUG` definition
 - `nm_add_doxygen`, a function for setting up a target for running Doxygen, optionally providing a simple default Doxygen configuration
 - Experimental: `nm_collect_objs_from_subdirectories`, a
 function for collecting objects of object libraries
-- `nm_enable_release_assertions`, a function for enabling assertions in release
-mode by removing the `NDEBUG` definition
 
 ### Changed
 - Restricted `nm_add_library` support for object libraries to CMake 3.12 and later.

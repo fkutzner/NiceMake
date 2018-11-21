@@ -26,6 +26,8 @@
 # other dealings in this Software without prior written authorization.
 
 if(NOT NM_COMPILERFLAGS_CMAKE_INCLUDED)
+  include(${CMAKE_CURRENT_LIST_DIR}/Platform.cmake)
+
   set(NM_LIB_COMPILE_OPTS_PRIVATE)
   set(NM_LIB_COMPILE_OPTS_PUBLIC)
   set(NM_LIB_COMPILE_OPTS_INTERFACE)
@@ -74,6 +76,7 @@ if(NOT NM_COMPILERFLAGS_CMAKE_INCLUDED)
     nm_add_tool_compile_definitions(${ARGN})
   endmacro()
 
+
   function(nm_enable_release_assertions)
     list(REMOVE_ITEM CMAKE_CXX_FLAGS_RELEASE "-DNDEBUG" "/DNDEBUG")
     list(REMOVE_ITEM CMAKE_CXX_FLAGS_RELWITHDEBINFO "-DNDEBUG" "/DNDEBUG")
@@ -90,6 +93,21 @@ if(NOT NM_COMPILERFLAGS_CMAKE_INCLUDED)
     set(CMAKE_CXX_FLAGS_MINSIZEREL "${CMAKE_CXX_FLAGS_MINSIZEREL}" PARENT_SCOPE)
   endfunction()
 
+  macro(nm_enforce_cpp_standard_adherence)
+    if(NM_COMPILING_WITH_GNULIKE)
+      nm_add_compile_options(-pedantic-errors)
+    elseif(NM_COMPILING_WITH_MSVC)
+      nm_add_compile_options(/permissive-)
+    endif()
+  endmacro()
+
+  macro(nm_enforce_lang_standard_adherence)
+    if(NM_COMPILING_WITH_GNULIKE)
+      nm_add_compile_options(-pedantic-errors)
+    elseif(NM_COMPILING_WITH_MSVC)
+      nm_add_compile_options(/permissive-)
+    endif()
+  endmacro()
 
   set(NM_COMPILERFLAGS_CMAKE_INCLUDED TRUE)
 endif()

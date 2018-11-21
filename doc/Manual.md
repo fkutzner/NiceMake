@@ -202,6 +202,15 @@ options:
 > Enables assertions in Release, RelWithDebInfo and MinSizeRel
 > builds, by removing the `NDEBUG` definition from the compiler
 > flags.
+> The options are added via `nm_add_compile_options()`.
+>
+
+>
+> `nm_enforce_lang_standard_adherence()`
+>
+> Adds the compiler options `-pedantic-errors` for Clang and GCC, and
+> `/permissive-` for MSVC.
+> The options are added via `nm_add_compile_options()`.
 >
 
 ## Defining libraries and tools
