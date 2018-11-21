@@ -26,7 +26,24 @@
 # other dealings in this Software without prior written authorization.
 
 if(NOT NM_NICEMAKE_CMAKE_INCLUDED)
+  set(NM_NICEMAKE_CMAKE_INCLUDED TRUE)
+
   cmake_minimum_required(VERSION 3.6 FATAL_ERROR)
+
+  #
+  # nm_include_guard(<file_id>)
+  #
+  # Aborts executing the current CMake file (via `return()`) if
+  # `nm_include_guard(<file_id>)` has already been called.
+  #
+  # Sets the global variable `NM_INCLUDE_GUARD_<file_id>`.
+  #
+  macro(nm_include_guard file_id)
+    if(NM_INCLUDE_GUARD_${file_id})
+      return()
+    endif()
+    set(NM_INCLUDE_GUARD_${file_id} TRUE)
+  endmacro()
 
   include(${CMAKE_CURRENT_LIST_DIR}/NiceMakeConfig.cmake)
   include(${CMAKE_CURRENT_LIST_DIR}/Platform.cmake)
@@ -44,6 +61,4 @@ if(NOT NM_NICEMAKE_CMAKE_INCLUDED)
     set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
     set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
   endif()
-
-  set(NM_NICEMAKE_CMAKE_INCLUDED TRUE)
 endif()

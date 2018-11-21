@@ -25,34 +25,32 @@
 # shall not be used in advertising or otherwise to promote the sale, use or
 # other dealings in this Software without prior written authorization.
 
-if(NOT NM_DOXYGEN_CMAKE_INCLUDED)
-  include(${CMAKE_CURRENT_LIST_DIR}/NiceMakeConfig.cmake)
+nm_include_guard(NM_DOXYGEN_CMAKE_INCLUDED)
 
-  function(nm_add_doxygen)
-    cmake_parse_arguments(
-      P_ARGS
-      ""
-      "CONFIG_FILE;DOCS_BUILD_DIR"
-      ""
-      ${ARGN}
-    )
+include(${CMAKE_CURRENT_LIST_DIR}/NiceMakeConfig.cmake)
 
-    if(NOT P_ARGS_CONFIG_FILE)
-      set(P_ARGS_CONFIG_FILE ${NM_SOURCE_DIR}/DoxygenGenericCfg.in)
-    endif()
-    if(NOT P_ARGS_DOCS_BUILD_DIR)
-      set(P_ARGS_DOCS_BUILD_DIR ${CMAKE_BINARY_DIR}/doc)
-    endif()
+function(nm_add_doxygen)
+  cmake_parse_arguments(
+    P_ARGS
+    ""
+    "CONFIG_FILE;DOCS_BUILD_DIR"
+    ""
+    ${ARGN}
+  )
 
-    find_package(Doxygen)
+  if(NOT P_ARGS_CONFIG_FILE)
+    set(P_ARGS_CONFIG_FILE ${NM_SOURCE_DIR}/DoxygenGenericCfg.in)
+  endif()
+  if(NOT P_ARGS_DOCS_BUILD_DIR)
+    set(P_ARGS_DOCS_BUILD_DIR ${CMAKE_BINARY_DIR}/doc)
+  endif()
 
-    if(DOXYGEN_FOUND)
-      configure_file(${P_ARGS_CONFIG_FILE} ${P_ARGS_DOCS_BUILD_DIR}/DoxygenCfg)
-      add_custom_target(doxygen ${DOXYGEN_EXECUTABLE} ${P_ARGS_DOCS_BUILD_DIR}/DoxygenCfg WORKING_DIRECTORY ${P_ARGS_DOCS_BUILD_DIR})
-    else()
-      message(WARNING "The target 'doxygen' could not be created because Doxygen could not be found.")
-    endif()
-  endfunction()
+  find_package(Doxygen)
 
-  set(NM_DOXYGEN_CMAKE_INCLUDED TRUE)
-endif()
+  if(DOXYGEN_FOUND)
+    configure_file(${P_ARGS_CONFIG_FILE} ${P_ARGS_DOCS_BUILD_DIR}/DoxygenCfg)
+    add_custom_target(doxygen ${DOXYGEN_EXECUTABLE} ${P_ARGS_DOCS_BUILD_DIR}/DoxygenCfg WORKING_DIRECTORY ${P_ARGS_DOCS_BUILD_DIR})
+  else()
+    message(WARNING "The target 'doxygen' could not be created because Doxygen could not be found.")
+  endif()
+endfunction()

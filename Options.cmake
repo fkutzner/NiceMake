@@ -25,21 +25,20 @@
 # shall not be used in advertising or otherwise to promote the sale, use or
 # other dealings in this Software without prior written authorization.
 
-if(NOT NM_OPTIONS_CMAKE_INCLUDED)
+nm_include_guard(NM_OPTIONS_CMAKE_INCLUDED)
 
-  if(NOT NM_CONF_OPTION_PREFIX)
-    string(TOUPPER "${CMAKE_PROJECT_NAME}" NM_OPT_PREFIX)
-  else()
-    set(NM_OPT_PREFIX "${NM_CONF_OPTION_PREFIX}")
-  endif()
-
-  if(NOT NM_CONF_DONT_DEFINE_SANITIZER_OPTIONS)
-    set(NM_CONF_DONT_DEFINE_SANITIZER_OPTIONS FALSE)
-    option(${NM_OPT_PREFIX}_ENABLE_ASAN "Enable clang/gcc's address sanitizer" OFF)
-    option(${NM_OPT_PREFIX}_ENABLE_MSAN "Enable clang/gcc's memory sanitizer" OFF)
-    option(${NM_OPT_PREFIX}_ENABLE_TSAN "Enable clang/gcc's thread sanitizer" OFF)
-    option(${NM_OPT_PREFIX}_ENABLE_UBSAN "Enable clang/gcc's undefined-behavior sanitizer" OFF)
-  endif()
-
-  set(NM_OPTIONS_CMAKE_INCLUDED TRUE)
+if(NOT NM_CONF_OPTION_PREFIX)
+  string(TOUPPER "${CMAKE_PROJECT_NAME}" NM_OPT_PREFIX)
+else()
+  set(NM_OPT_PREFIX "${NM_CONF_OPTION_PREFIX}")
 endif()
+
+if(NOT NM_CONF_DONT_DEFINE_SANITIZER_OPTIONS)
+  set(NM_CONF_DONT_DEFINE_SANITIZER_OPTIONS FALSE)
+  option(${NM_OPT_PREFIX}_ENABLE_ASAN "Enable clang/gcc's address sanitizer" OFF)
+  option(${NM_OPT_PREFIX}_ENABLE_MSAN "Enable clang/gcc's memory sanitizer" OFF)
+  option(${NM_OPT_PREFIX}_ENABLE_TSAN "Enable clang/gcc's thread sanitizer" OFF)
+  option(${NM_OPT_PREFIX}_ENABLE_UBSAN "Enable clang/gcc's undefined-behavior sanitizer" OFF)
+endif()
+
+set(NM_OPTIONS_CMAKE_INCLUDED TRUE)

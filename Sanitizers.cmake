@@ -25,41 +25,39 @@
 # shall not be used in advertising or otherwise to promote the sale, use or
 # other dealings in this Software without prior written authorization.
 
-if(NOT NM_SANITIZERS_CMAKE_INCLUDED)
-  include(${CMAKE_CURRENT_LIST_DIR}/Options.cmake)
-  include(${CMAKE_CURRENT_LIST_DIR}/CompilerFlags.cmake)
-  include(${CMAKE_CURRENT_LIST_DIR}/Platform.cmake)
+nm_include_guard(NM_SANITIZERS_CMAKE_INCLUDED)
+
+include(${CMAKE_CURRENT_LIST_DIR}/Options.cmake)
+include(${CMAKE_CURRENT_LIST_DIR}/CompilerFlags.cmake)
+include(${CMAKE_CURRENT_LIST_DIR}/Platform.cmake)
 
 
-  if(NM_COMPILING_WITH_GNULIKE)
-    set(sanitizer_flags)
+if(NM_COMPILING_WITH_GNULIKE)
+  set(sanitizer_flags)
 
-    if(${NM_OPT_PREFIX}_ENABLE_ASAN)
-      list(APPEND sanitizer_flags -fsanitize=address)
-    endif()
-
-    if(${NM_OPT_PREFIX}_ENABLE_MSAN)
-      list(APPEND sanitizer_flags -fsanitize=memory)
-    endif()
-
-    if(${NM_OPT_PREFIX}_ENABLE_TSAN)
-      list(APPEND sanitizer_flags -fsanitize=thread)
-    endif()
-
-    if(${NM_OPT_PREFIX}_ENABLE_UBSAN)
-      list(APPEND sanitizer_flags -fsanitize=undefined)
-    endif()
-
-    if(sanitizer_flags)
-      list(APPEND sanitizer_flags "-fno-omit-frame-pointer")
-      nm_add_compile_options(PRIVATE ${sanitizer_flags})
-
-      string(REPLACE ";" " " SANITIZER_LINKER_FLAGS "${sanitizer_flags}")
-      set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${SANITIZER_LINKER_FLAGS}")
-    endif()
-  else()
-    message(WARNING "NiceMake: no sanitizer support for MSVC. Sanitizer settings ignored.")
+  if(${NM_OPT_PREFIX}_ENABLE_ASAN)
+    list(APPEND sanitizer_flags -fsanitize=address)
   endif()
 
-  set(NM_SANITIZERS_CMAKE_INCLUDED TRUE)
+  if(${NM_OPT_PREFIX}_ENABLE_MSAN)
+    list(APPEND sanitizer_flags -fsanitize=memory)
+  endif()
+
+  if(${NM_OPT_PREFIX}_ENABLE_TSAN)
+    list(APPEND sanitizer_flags -fsanitize=thread)
+  endif()
+
+  if(${NM_OPT_PREFIX}_ENABLE_UBSAN)
+    list(APPEND sanitizer_flags -fsanitize=undefined)
+  endif()
+
+  if(sanitizer_flags)
+    list(APPEND sanitizer_flags "-fno-omit-frame-pointer")
+    nm_add_compile_options(PRIVATE ${sanitizer_flags})
+
+    string(REPLACE ";" " " SANITIZER_LINKER_FLAGS "${sanitizer_flags}")
+    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${SANITIZER_LINKER_FLAGS}")
+  endif()
+else()
+  message(WARNING "NiceMake: no sanitizer support for MSVC. Sanitizer settings ignored.")
 endif()

@@ -25,38 +25,36 @@
 # shall not be used in advertising or otherwise to promote the sale, use or
 # other dealings in this Software without prior written authorization.
 
-if(NOT NM_THIRDPARTYLIBS_CMAKE_INCLUDED)
-  set(NM_THIRDPARTY_LIBS)
+nm_include_guard(NM_THIRDPARTYLIBS_CMAKE_INCLUDED)
 
-  macro(nm_add_thirdparty_libs)
-    cmake_parse_arguments(
-      P_ARGS
-      ""
-      "NAME"
-      "LIBS;INTERFACE_INCLUDE_DIRS;INTERFACE_COMPILE_OPTIONS"
-      ${ARGN}
-    )
+set(NM_THIRDPARTY_LIBS)
 
-    if(NOT P_ARGS_LIBS)
-      message(FATAL "nm_add_thirdparty_lib: LIBS must be specified")
+macro(nm_add_thirdparty_libs)
+  cmake_parse_arguments(
+    P_ARGS
+    ""
+    "NAME"
+    "LIBS;INTERFACE_INCLUDE_DIRS;INTERFACE_COMPILE_OPTIONS"
+    ${ARGN}
+  )
+
+  if(NOT P_ARGS_LIBS)
+    message(FATAL "nm_add_thirdparty_lib: LIBS must be specified")
+  endif()
+
+  if(P_ARGS_NAME)
+    set(nm_dummy_target_name ${P_ARGS_NAME})
+    add_library(${nm_dummy_target_name} INTERFACE)
+    target_link_libraries(${nm_dummy_target_name} INTERFACE ${P_ARGS_LIBS})
+    target_include_directories(${nm_dummy_target_name} INTERFACE ${P_ARGS_INTERFACE_INCLUDE_DIRS})
+    target_compile_options(${nm_dummy_target_name} INTERFACE ${P_ARGS_INTERFACE_COMPILE_OPTIONS})
+
+    list(APPEND NM_THIRDPARTY_LIBS ${nm_dummy_target_name})
+  else()
+    if(P_ARGS_INTERFACE_INCLUDE_DIRS OR P_ARGS_INTERFACE_COMPILE_OPTIONS)
+      message(FATAL "nm_add_thirdparty_lib: INTERFACE_INCLUDE_DIRS and INTERFACE_COMPILE_OPTIONS can only be specified in conjunction with NAME")
     endif()
 
-    if(P_ARGS_NAME)
-      set(nm_dummy_target_name ${P_ARGS_NAME})
-      add_library(${nm_dummy_target_name} INTERFACE)
-      target_link_libraries(${nm_dummy_target_name} INTERFACE ${P_ARGS_LIBS})
-      target_include_directories(${nm_dummy_target_name} INTERFACE ${P_ARGS_INTERFACE_INCLUDE_DIRS})
-      target_compile_options(${nm_dummy_target_name} INTERFACE ${P_ARGS_INTERFACE_COMPILE_OPTIONS})
-
-      list(APPEND NM_THIRDPARTY_LIBS ${nm_dummy_target_name})
-    else()
-      if(P_ARGS_INTERFACE_INCLUDE_DIRS OR P_ARGS_INTERFACE_COMPILE_OPTIONS)
-        message(FATAL "nm_add_thirdparty_lib: INTERFACE_INCLUDE_DIRS and INTERFACE_COMPILE_OPTIONS can only be specified in conjunction with NAME")
-      endif()
-
-      list(APPEND NM_THIRDPARTY_LIBS ${P_ARGS_LIBS})
-    endif()
-  endmacro()
-
-  set(NM_THIRDPARTYLIBS_CMAKE_INCLUDED TRUE)
-endif()
+    list(APPEND NM_THIRDPARTY_LIBS ${P_ARGS_LIBS})
+  endif()
+endmacro()
