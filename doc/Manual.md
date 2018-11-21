@@ -223,9 +223,9 @@ third-party libraries:
 > `MODULE` or `OBJECT`, the first argument is directly
 > passed as the first argument to `add_library`.
 > Otherwise, if it is `OBJECT-SHARED`, `OBJECT` is passed
-> as the first argument to `add_library` and compiler flags
-> are set up for the created target such that the objects
-> can be used in a shared library.
+> as the first argument to `add_library`. NiceMake supports
+> the `OBJECT` and `OBJECT_SHARED` modes only for CMake 3.12
+> and later.
 >
 > The compiler flags previously passed to
 > `nm_add_lib_compile_options(<kind> ...)` are added to the

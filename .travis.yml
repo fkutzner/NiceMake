@@ -13,5 +13,6 @@ sudo: required
 script:
   - mkdir -p ../run-tests
   - cd ../run-tests
+  - cmake --version
   - cmake $TRAVIS_BUILD_DIR/tests
-  - ctest
+  - ctest --output-on-failure

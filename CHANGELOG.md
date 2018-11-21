@@ -11,6 +11,7 @@ function for collecting objects of object libraries
 mode by removing the `NDEBUG` definition
 
 ### Changed
+- Restricted `nm_add_library` support for object libraries to CMake 3.12 and later.
 - Third-party libraries are now regularly linked to object libraries defined
   using `nm_add_library`.
 

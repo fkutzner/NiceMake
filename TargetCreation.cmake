@@ -36,6 +36,13 @@ if(NOT NM_TARGETCREATION_CMAKE_INCLUDED)
   set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
   function(nm_add_library NAME KIND)
+    if((KIND MATCHES "OBJECT") AND (CMAKE_VERSION VERSION_LESS "3.12"))
+      # Pre-3.12 CMake has incomplete support for object libraries, e.g.
+      # no way of importing compile options and include dirs via
+      # target_link_libraries:
+      message(FATAL_ERROR "NiceMake supports object libraries only with CMake 3.12 and later")
+    endif()
+
     string(REPLACE "." "/" FOLDER_NAME ${NAME})
 
     set(nm_target_include_dir "${PROJECT_SOURCE_DIR}/${NM_CONF_INCLUDE_DIR}/${FOLDER_NAME}")
