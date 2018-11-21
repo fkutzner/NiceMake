@@ -13,6 +13,7 @@ Table of contents:
 9. [Sanitizers](#sanitizers)
 10. [Adding Google Test to your project](#adding-google-test-to-your-project)
 11. [Configuring Doxygen for your project](#configuring-doxygen-for-your-project)
+12. [Setting frequently-used compiler options](#setting-frequently-used-compiler-options)
 
 ## Supported platforms
 
@@ -193,34 +194,6 @@ can be added via `nm_add_lib_compile_definitions`,
 > and `nm_add_tool_compile_definitions`, passing all arguments
 > to both functions.
 
-NiceMake offers shorthands for setting frequently-used compiler
-options:
-
->
-> `nm_enable_release_assertions()`
->
-> Enables assertions in Release, RelWithDebInfo and MinSizeRel
-> builds, by removing the `NDEBUG` definition from the compiler
-> flags.
-> The options are added via `nm_add_compile_options()`.
->
-
->
-> `nm_enforce_lang_standard_adherence()`
->
-> Adds the compiler options `-pedantic-errors` for Clang and GCC, and
-> `/permissive-` for MSVC.
-> The options are added via `nm_add_compile_options()`.
->
-
->
-> `nm_use_high_compiler_warning_level()`
->
-> Instructs the compiler to emit more warnings than by default.
-> For Clang and GCC, the options `-Wall -Wextra -Wpedantic` are added;
-> for MSVC, the option `/W3` is added. The options are added via
-> `nm_add_compile_options()`.
->
 
 ## Defining libraries and tools
 
@@ -456,3 +429,35 @@ file and a different build directory:
 > is built in the directory `${CMAKE_BINARY_DIR}/doc`, i.e. the
 > path to the top level of the build tree. Otherwise, it is built
 > in the directory `<dir>`.
+
+
+# Setting frequently-used compiler options
+
+NiceMake offers shorthands for setting frequently-used compiler
+options:
+
+>
+> `nm_enable_release_assertions()`
+>
+> Enables assertions in Release, RelWithDebInfo and MinSizeRel
+> builds, by removing the `NDEBUG` definition from the compiler
+> flags.
+> The options are added via `nm_add_compile_options()`.
+>
+
+>
+> `nm_enforce_lang_standard_adherence()`
+>
+> Adds the compiler options `-pedantic-errors` for Clang and GCC, and
+> `/permissive-` for MSVC.
+> The options are added via `nm_add_compile_options()`.
+>
+
+>
+> `nm_use_high_compiler_warning_level()`
+>
+> Instructs the compiler to emit more warnings than by default.
+> For Clang and GCC, the options `-Wall -Wextra -Wpedantic` are added;
+> for MSVC, the option `/W3` is added. The options are added via
+> `nm_add_compile_options()`.
+>
