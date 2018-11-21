@@ -28,8 +28,6 @@
 cmake_minimum_required(VERSION 3.5)
 project(nicemake-tests)
 
-include(../NiceMake.cmake)
-
 enable_testing()
 
 add_subdirectory(build-lib)

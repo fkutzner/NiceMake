@@ -4,6 +4,8 @@ The format of this file is based on [Keep a Changelog 1.0.0](https://keepachange
 
 ## [Unreleased]
 ### Added
+- `nm_set_rtti_enabled`, a function for controlling the
+enabledness of C++ RTTI.
 - `nm_use_high_compiler_warning_level`, a function for setting compile options raising the compiler's
 warning level.
 - `nm_enforce_lang_standard_adherence`, a function for setting compiler flags

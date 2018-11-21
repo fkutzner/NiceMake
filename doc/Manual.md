@@ -461,3 +461,13 @@ options:
 > for MSVC, the option `/W3` is added. The options are added via
 > `nm_add_compile_options()`.
 >
+
+>
+> `nm_set_rtti_enabled(TRUE|FALSE)`
+>
+> When invoked with the argument `TRUE`, compiler
+> options enabling C++ RTTI are added. When invoked
+> with the argument `FALSE`, compiler
+> options disabling C++ RTTI are added. The options are added via
+> `nm_add_compile_options()`.
+>
