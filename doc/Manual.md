@@ -193,6 +193,17 @@ can be added via `nm_add_lib_compile_definitions`,
 > and `nm_add_tool_compile_definitions`, passing all arguments
 > to both functions.
 
+NiceMake offers shorthands for setting frequently-used compiler
+options:
+
+>
+> `nm_enable_release_assertions()`
+>
+> Enables assertions in Release, RelWithDebInfo and MinSizeRel
+> builds, by removing the `NDEBUG` definition from the compiler
+> flags.
+>
+
 ## Defining libraries and tools
 
 NiceMake provides thin wrappers around

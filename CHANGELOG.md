@@ -7,6 +7,8 @@ The format of this file is based on [Keep a Changelog 1.0.0](https://keepachange
 - `nm_add_doxygen`, a function for setting up a target for running Doxygen, optionally providing a simple default Doxygen configuration
 - Experimental: `nm_collect_objs_from_subdirectories`, a
 function for collecting objects of object libraries
+- `nm_enable_release_assertions`, a function for enabling assertions in release
+mode by removing the `NDEBUG` definition
 
 ### Changed
 - Third-party libraries are now regularly linked to object libraries defined
