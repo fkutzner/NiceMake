@@ -213,6 +213,15 @@ options:
 > The options are added via `nm_add_compile_options()`.
 >
 
+>
+> `nm_use_high_compiler_warning_level()`
+>
+> Instructs the compiler to emit more warnings than by default.
+> For Clang and GCC, the options `-Wall -Wextra -Wpedantic` are added;
+> for MSVC, the option `/W3` is added. The options are added via
+> `nm_add_compile_options()`.
+>
+
 ## Defining libraries and tools
 
 NiceMake provides thin wrappers around

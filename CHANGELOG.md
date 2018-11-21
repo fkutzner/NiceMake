@@ -4,6 +4,8 @@ The format of this file is based on [Keep a Changelog 1.0.0](https://keepachange
 
 ## [Unreleased]
 ### Added
+- `nm_use_high_compiler_warning_level`, a function for setting compile options raising the compiler's
+warning level.
 - `nm_enforce_lang_standard_adherence`, a function for setting compiler flags
 for strict language standard adherence
 - `nm_enable_release_assertions`, a function for enabling assertions in release
