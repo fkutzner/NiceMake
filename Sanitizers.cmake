@@ -58,6 +58,9 @@ if(NM_COMPILING_WITH_GNULIKE)
     string(REPLACE ";" " " SANITIZER_LINKER_FLAGS "${sanitizer_flags}")
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${SANITIZER_LINKER_FLAGS}")
   endif()
-else()
+elseif(${NM_OPT_PREFIX}_ENABLE_ASAN
+       OR ${NM_OPT_PREFIX}_ENABLE_MSAN
+       OR ${NM_OPT_PREFIX}_ENABLE_TSAN
+       OR ${NM_OPT_PREFIX}_ENABLE_UBSAN)
   message(WARNING "NiceMake: no sanitizer support for MSVC. Sanitizer settings ignored.")
 endif()
