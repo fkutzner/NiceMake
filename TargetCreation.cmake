@@ -66,7 +66,7 @@ function(nm_add_library NAME KIND)
   target_link_libraries(${NAME} ${NM_THIRDPARTY_LIBS})
   nm_detail_add_compile_options_to_lib(${NAME} ${KIND})
 
-  target_include_directories(${NAME} PUBLIC ${PROJECT_SOURCE_DIR}/${NM_CONF_INCLUDE_DIR})
+  target_include_directories(${NAME} PUBLIC $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/${NM_CONF_INCLUDE_DIR}>)
 endfunction()
 
 function(nm_add_dummy_library NAME)

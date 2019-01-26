@@ -23,6 +23,8 @@ function for collecting objects of object libraries
 
 ### Fixed
 - Fixed default setting of `NM_CONF_TOOLS_DIR`
+- `nm_add_library` now adds the build tree's include directory using the
+  `$<BUILD_INTERFACE:...>` expression
 
 ## [0.2.0] - 2018-10-28
 ### Added
