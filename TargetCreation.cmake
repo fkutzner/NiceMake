@@ -63,7 +63,7 @@ function(nm_add_library NAME KIND)
   set_property(TARGET "${NAME}" PROPERTY FOLDER "Libraries/${FOLDER_NAME}")
   set_property(TARGET "${NAME}" PROPERTY PROJECT_LABEL "Library")
 
-  target_link_libraries(${NAME} ${NM_THIRDPARTY_LIBS})
+  target_link_libraries(${NAME} PRIVATE ${NM_THIRDPARTY_LIBS})
   nm_detail_add_compile_options_to_lib(${NAME} ${KIND})
 
   target_include_directories(${NAME} PUBLIC $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/${NM_CONF_INCLUDE_DIR}>)
