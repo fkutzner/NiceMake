@@ -39,7 +39,7 @@ macro(nm_add_thirdparty_libs)
   )
 
   if(NOT P_ARGS_LIBS)
-    message(FATAL "nm_add_thirdparty_lib: LIBS must be specified")
+    message(FATAL_ERROR "nm_add_thirdparty_lib: LIBS must be specified")
   endif()
 
   if(P_ARGS_NAME)
@@ -52,7 +52,7 @@ macro(nm_add_thirdparty_libs)
     list(APPEND NM_THIRDPARTY_LIBS ${nm_dummy_target_name})
   else()
     if(P_ARGS_INTERFACE_INCLUDE_DIRS OR P_ARGS_INTERFACE_COMPILE_OPTIONS)
-      message(FATAL "nm_add_thirdparty_lib: INTERFACE_INCLUDE_DIRS and INTERFACE_COMPILE_OPTIONS can only be specified in conjunction with NAME")
+      message(FATAL_ERROR "nm_add_thirdparty_lib: INTERFACE_INCLUDE_DIRS and INTERFACE_COMPILE_OPTIONS can only be specified in conjunction with NAME")
     endif()
 
     list(APPEND NM_THIRDPARTY_LIBS ${P_ARGS_LIBS})
