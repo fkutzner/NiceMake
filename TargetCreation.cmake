@@ -60,8 +60,11 @@ function(nm_add_library NAME KIND)
   endif()
 
   add_library(${NAME} ${simple_kind} ${LIBRARY_HEADERS} ${ARGN})
-  set_property(TARGET "${NAME}" PROPERTY FOLDER "Libraries/${FOLDER_NAME}")
-  set_property(TARGET "${NAME}" PROPERTY PROJECT_LABEL "Library")
+
+  get_filename_component(IDE_FOLDER_NAME "${FOLDER_NAME}" DIRECTORY)
+  get_filename_component(IDE_PROJECT_NAME "${FOLDER_NAME}" NAME)
+  set_property(TARGET "${NAME}" PROPERTY FOLDER "Libraries/${IDE_FOLDER_NAME}")
+  set_property(TARGET "${NAME}" PROPERTY PROJECT_LABEL "${IDE_PROJECT_NAME}")
 
   target_link_libraries(${NAME} PRIVATE ${NM_THIRDPARTY_LIBS})
   nm_detail_add_compile_options_to_lib(${NAME} ${KIND})
@@ -84,8 +87,11 @@ function(nm_add_tool NAME)
   file(GLOB ${TOOL_HEADERS} "${nm_target_include_dir}/*.h")
 
   add_executable(${NAME} ${TOOL_HEADERS} ${ARGN})
-  set_property(TARGET "${NAME}" PROPERTY FOLDER "Tools/${FOLDER_NAME}")
-  set_property(TARGET "${NAME}" PROPERTY PROJECT_LABEL "Tool")
+
+  get_filename_component(IDE_FOLDER_NAME "${FOLDER_NAME}" DIRECTORY)
+  get_filename_component(IDE_PROJECT_NAME "${FOLDER_NAME}" NAME)
+  set_property(TARGET "${NAME}" PROPERTY FOLDER "Tools/${IDE_FOLDER_NAME}")
+  set_property(TARGET "${NAME}" PROPERTY PROJECT_LABEL "${IDE_PROJECT_NAME}")
 
   target_link_libraries(${NAME} PRIVATE ${NM_THIRDPARTY_LIBS})
   target_compile_options(${NAME} PRIVATE ${NM_TOOL_COMPILE_OPTS})
