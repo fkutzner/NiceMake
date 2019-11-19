@@ -34,7 +34,7 @@ macro(nm_add_thirdparty_libs)
     P_ARGS
     ""
     "NAME"
-    "LIBS;INTERFACE_INCLUDE_DIRS;INTERFACE_COMPILE_OPTIONS"
+    "LIBS;INTERFACE_INCLUDE_DIRS;INTERFACE_COMPILE_OPTIONS;INTERFACE_SYSTEM_INCLUDE_DIRECTORIES"
     ${ARGN}
   )
 
@@ -46,8 +46,14 @@ macro(nm_add_thirdparty_libs)
     set(nm_dummy_target_name ${P_ARGS_NAME})
     add_library(${nm_dummy_target_name} INTERFACE)
     target_link_libraries(${nm_dummy_target_name} INTERFACE ${P_ARGS_LIBS})
-    target_include_directories(${nm_dummy_target_name} INTERFACE ${P_ARGS_INTERFACE_INCLUDE_DIRS})
     target_compile_options(${nm_dummy_target_name} INTERFACE ${P_ARGS_INTERFACE_COMPILE_OPTIONS})
+    if(P_ARGS_INTERFACE_INCLUDE_DIRS)
+      target_include_directories(${nm_dummy_target_name} INTERFACE ${P_ARGS_INTERFACE_INCLUDE_DIRS})
+    endif()
+
+    if(P_ARGS_INTERFACE_SYSTEM_INCLUDE_DIRECTORIES)
+      target_include_directories(${nm_dummy_target_name} SYSTEM INTERFACE ${P_ARGS_INTERFACE_SYSTEM_INCLUDE_DIRECTORIES})
+    endif()
 
     list(APPEND NM_THIRDPARTY_LIBS ${nm_dummy_target_name})
   else()

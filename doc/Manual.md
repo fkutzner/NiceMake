@@ -332,7 +332,7 @@ The second variant is useful for libraries that do not
 have a CMake module script, or whose CMake module script
 does not define an interface library target:
 
-> `nm_add_thirdparty_libs(NAME <name> LIBS <lib1> [<lib2> ...] [INTERFACE_INCLUDE_DIRS <dir1> [<dir2> ...]] [INTERFACE_COMPILE_OPTIONS <opt1> [<opt2> ...]])`
+> `nm_add_thirdparty_libs(NAME <name> LIBS <lib1> [<lib2> ...] [INTERFACE_INCLUDE_DIRS <dir1> [<dir2> ...]] [INTERFACE_SYSTEM_INCLUDE_DIRECTORIES <sdir1> [<sdir2> ...]] [INTERFACE_COMPILE_OPTIONS <opt1> [<opt2> ...]])`
 >
 > Creates an `INTERFACE` library target `<name>`
 > and links `<name>` to `<lib1> [<lib2> ...]`.
@@ -347,6 +347,13 @@ does not define an interface library target:
 > interface include directories (causing CMake to add
 > the include directories `<dir1> [<dir2> ...]` to all
 >  targets linking to the interface library).
+>
+> If `INTERFACE_SYSTEM_INCLUDE_DIRECTORIES`, adds
+> `<sdir1> [<sdir2> ...]` to the interface target's
+> interface system include directories (causing CMake to add
+> the include directories `<sdir1> [<sdir2> ...]` to all
+> targets linking to the interface library). See
+> the [CMake documentation of INTERFACE_SYSTEM_INCLUDE_DIRECTORIES](https://cmake.org/cmake/help/v3.4/prop_tgt/INTERFACE_SYSTEM_INCLUDE_DIRECTORIES.html).
 >
 > If `INTERFACE_COMPILE_OPTIONS` is specified, adds
 > `<opt1> [<opt2> ...]` to the interface target's
